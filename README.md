@@ -5,8 +5,7 @@ APP TEMPLATE
 
 
 ## About 	 	
-- Rehabit Application helps users to track daily bad habits/ mistakes. 
-- App tracks how long or how many times the user repeated a mistake. 
+Rehabit Application helps users to track daily bad habits/ mistakes, share one’s bad habits  with other users anonymously and take/give suggestions from others. 
 
 ## How it works
 

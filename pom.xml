@@ -8,11 +8,11 @@
 		<version>2.2.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.hackathon</groupId>
+	<groupId>com.vikingzorros</groupId>
 	<artifactId>rehabit</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>rehabit</name>
-	<description>Project for hackathon</description>
+	<description>Project tracks daily bad habits/ mistakes, allows user to share one’s bad habits  with other users anonymously and take/give suggestions from others. </description>
 
 	<properties>
 		<java.version>1.8</java.version>

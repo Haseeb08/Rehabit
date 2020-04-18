@@ -1,4 +1,4 @@
-package com.hackathon.rehabit;
+package com.vikingzorros.rehabit;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
