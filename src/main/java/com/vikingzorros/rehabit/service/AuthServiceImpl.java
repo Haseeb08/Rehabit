@@ -3,16 +3,24 @@ package com.vikingzorros.rehabit.service;
 import com.twilio.Twilio;
 import com.twilio.rest.verify.v2.service.Verification;
 import com.twilio.rest.verify.v2.service.VerificationCheck;
+import org.springframework.beans.factory.annotation.Value;
+
 public class AuthServiceImpl implements AuthService {
 
-    public static final String ACCOUNT_SID = "ACeffc570395fa34c1f322f187752727d8";
-    public static final String AUTH_TOKEN = "27cbf5058c5cf69e6d726ba8bae5aff5";
+    @Value("${twilio.accountsid}")
+    private String accountSid;
+
+    @Value("${twilio.authtoken}")
+    private String authToken;
+
+    @Value("${twilio.pathserviceid}")
+    private String pathServiceId;
 
     @Override
     public void sendToken(String phoneNumber) {
-        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Twilio.init(accountSid, authToken);
         Verification verification = Verification.creator(
-                "VAd10bde58117cd0214c68d5860de835dd",
+                pathServiceId,
                 phoneNumber,
                 "sms")
                 .create();
@@ -22,9 +30,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String verifyToken(String phoneNumber,String otp) {
-        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Twilio.init(accountSid, authToken);
         VerificationCheck verificationCheck = VerificationCheck.creator(
-                "VAd10bde58117cd0214c68d5860de835dd",
+                pathServiceId,
                 otp)
                 .setTo(phoneNumber).create();
 
