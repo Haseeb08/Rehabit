@@ -1,13 +1,9 @@
 package com.vikingzorros.rehabit.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -45,49 +41,12 @@ public class User {
 
     @OneToMany(cascade=CascadeType.ALL ,
             fetch = FetchType.LAZY,
-    mappedBy = "user")
+            mappedBy = "user")
     private List<Comment> comments;
 
-    @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.LAZY,
-    mappedBy = "user")
+    @OneToMany(cascade=CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "user")
     private List<BlockUser> blockUserList;
-
-    public User(String userName, String email, String password, String phoneNumber) {
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void addPost(Post tempPost) {
-
-        if (posts == null) {
-            posts = new ArrayList<>();
-        }
-
-        posts.add(tempPost);
-
-        tempPost.setUser(this);
-    }
-
-    public void addComment(Comment tempComment) {
-
-        if (comments == null) {
-            comments = new ArrayList<>();
-        }
-
-        comments.add(tempComment);
-
-        tempComment.setUser(this);
-    }
-
-    public void addBlockUser(BlockUser tempBlockUser) {
-
-        if (blockUserList == null) {
-            blockUserList = new ArrayList<>();
-        }
-
-        blockUserList.add(tempBlockUser);
-    }
 
 }

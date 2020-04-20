@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name="trash_post")
-public class ThrashPost {
+public class TrashPost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,13 +24,8 @@ public class ThrashPost {
     @Column(name = "time")
     private String time;
 
-    // postId
-
     @OneToOne
     @JoinColumn(name = "posts_id")
     private Post post;
 
-    public ThrashPost(int id) {
-        this.id = id;
-    }
 }

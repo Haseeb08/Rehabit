@@ -54,31 +54,4 @@ public class Post {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public Post(String title, String description) {
-        this.title = title;
-        this.description = description;
-    }
-
-    public void addComment(Comment tempComment) {
-
-        if (commentList== null) {
-            commentList = new ArrayList<>();
-        }
-
-        commentList.add(tempComment);
-
-        tempComment.setPost(this);
-    }
-
-    public void addTrackHabit(TrackHabit tempTrackHabit) {
-
-        if (trackHabitList == null) {
-            trackHabitList = new ArrayList<>();
-        }
-
-        trackHabitList.add(tempTrackHabit);
-
-        tempTrackHabit.setPost(this);
-    }
-
 }

@@ -24,7 +24,4 @@ public class MotivationalMessage {
     @Column(name="message")
     private String message;
 
-    public MotivationalMessage(String message) {
-        this.message = message;
-    }
 }

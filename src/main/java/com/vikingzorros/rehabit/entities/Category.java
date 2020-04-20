@@ -21,13 +21,13 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    int id;
+    private int id;
 
     @Column(name="name")
-    String name;
+    private String name;
 
     @Column(name = "description")
-    String description;
+    private String description;
 
     @OneToMany(cascade=CascadeType.ALL,
             fetch = FetchType.LAZY)
@@ -44,23 +44,4 @@ public class Category {
         this.description = description;
     }
 
-    public void addMotivationalMessage(MotivationalMessage tempMotivationalMessage) {
-
-        if (messageList == null) {
-            messageList = new ArrayList<>();
-        }
-
-        messageList.add(tempMotivationalMessage);
-    }
-
-    public void addPost(Post tempPost) {
-
-        if (posts == null) {
-            posts = new ArrayList<>();
-        }
-
-        posts.add(tempPost);
-
-        tempPost.setCategory(this);
-    }
 }

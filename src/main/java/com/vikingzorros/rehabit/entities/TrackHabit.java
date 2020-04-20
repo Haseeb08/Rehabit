@@ -37,7 +37,4 @@ public class TrackHabit {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    public TrackHabit(String notifyTime) {
-        this.notifyTime = notifyTime;
-    }
 }

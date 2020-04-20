@@ -31,12 +31,9 @@ public class Notification {
     private String time;
 
 //track habit id
-@OneToOne( cascade=CascadeType.ALL,
+    @OneToOne( cascade=CascadeType.ALL,
         fetch = FetchType.LAZY,
         mappedBy = "notification")
-private TrackHabit trackHabit;
+    private TrackHabit trackHabit;
 
-    public Notification(String message) {
-        this.message = message;
-    }
 }

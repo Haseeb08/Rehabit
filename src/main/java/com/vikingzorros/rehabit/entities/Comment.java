@@ -18,16 +18,16 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    int id;
+    private int id;
 
     @Column(name = "message")
-    String message;
+    private String message;
 
     @Column(name = "create_time")
-    String createTime;
+    private String createTime;
 
     @Column(name = "status")
-    boolean status;
+    private boolean status;
 
     @ManyToOne(cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -37,7 +37,4 @@ public class Comment {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    public Comment(String message) {
-        this.message = message;
-    }
 }
