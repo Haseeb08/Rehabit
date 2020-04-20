@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/Rehabit")
 public class HomeController {
+
     @RequestMapping
     public String homePage(){
-        return "home";
+        return "home1";
     }
 
     @RequestMapping("/test")
@@ -22,13 +23,13 @@ public class HomeController {
         return "dashboard";
     }
 
-    @PostMapping("/processLogin")
+    @RequestMapping("/login")
     public String processLogin(){
-        return "dashboard";
+        return "login";
     }
-    @PostMapping("/processSignup")
+    @RequestMapping("/signup")
     public String processSignup(){
-        return "dashboard";
+        return "signup";
     }
 
 
