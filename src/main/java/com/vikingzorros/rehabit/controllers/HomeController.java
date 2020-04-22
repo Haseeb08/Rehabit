@@ -32,5 +32,9 @@ public class HomeController {
         return "signup";
     }
 
+    @RequestMapping("/otp")
+    public String otpPage(){
+        return "otp";
+    }
 
 }

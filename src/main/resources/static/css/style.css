@@ -67,7 +67,7 @@ html {
  background: #f7f7f7 
 }
 .signup{
-  height: 110%;
+  height: 120%;
  width: 40%;
  float: left;
  
@@ -75,6 +75,15 @@ html {
  margin-left: 30%;
 background: #f7f7f7 
 }
+.otp{
+   height: 60%;
+  width: 40%;
+  float: left;
+
+  align-items:center;
+  margin-left: 30%;
+ background: #f7f7f7
+ }
 .loginleft{
 	 height: 600px;
   width: 30%;
