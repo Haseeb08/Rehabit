@@ -1,9 +1,6 @@
 package com.vikingzorros.rehabit.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,6 +8,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name="comment")
 public class Comment {
@@ -29,10 +27,12 @@ public class Comment {
     @Column(name = "status")
     private boolean status;
 
+    @ToString.Exclude
     @ManyToOne(cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ToString.Exclude
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;

@@ -10,6 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name="user")
 public class User {
@@ -19,12 +20,19 @@ public class User {
     @Column(name="id")
     private int id;
 
+    @Column(name="first_name")
+    private String firstName;
+
+    @Column(name="last_name")
+    private String lastName;
+
     @Column(name="user_name")
     private String userName;
 
     @Column(name="email")
     private String email;
 
+    @ToString.Exclude
     @Column(name="password")
     private String password;
 
@@ -34,16 +42,19 @@ public class User {
     @Column(name="create_time")
     private String createTime;
 
+    @ToString.Exclude
     @OneToMany(cascade=CascadeType.ALL ,
             fetch = FetchType.LAZY,
             mappedBy = "user")
     private List<Post> posts;
 
+    @ToString.Exclude
     @OneToMany(cascade=CascadeType.ALL ,
             fetch = FetchType.LAZY,
             mappedBy = "user")
     private List<Comment> comments;
 
+    @ToString.Exclude
     @OneToMany(cascade=CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "user")

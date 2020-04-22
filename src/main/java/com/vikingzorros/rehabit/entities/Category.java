@@ -1,10 +1,7 @@
 package com.vikingzorros.rehabit.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +11,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name="category")
 public class Category {
@@ -29,19 +27,16 @@ public class Category {
     @Column(name = "description")
     private String description;
 
+    @ToString.Exclude
     @OneToMany(cascade=CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+            fetch = FetchType.LAZY,
+            mappedBy = "category")
     private List<MotivationalMessage> messageList;
 
+    @ToString.Exclude
     @OneToMany(cascade=CascadeType.ALL ,
             fetch = FetchType.LAZY,
             mappedBy = "user")
     private List<Post> posts;
-
-    public Category(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
 
 }

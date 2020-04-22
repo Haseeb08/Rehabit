@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,26 +20,29 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    int id;
+    private int id;
 
     @Column(name="title")
-    String title;
+    private String title;
 
     @Column(name = "description")
-    String description;
+    private String description;
 
     @Column(name = "create_time")
-    String createTime;
+    private String createTime;
+
+    @Column(name = "is_anonymous")
+    private boolean isAnonymous;
 
     @Column(name = "habit_count")
-    int habitCount;
+    private int habitCount;
 
     @OneToMany(cascade=CascadeType.ALL,
             fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private List<Comment> commentList;
 
-    @ManyToOne(cascade = CascadeType.ALL,
+    @ManyToOne(
             fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

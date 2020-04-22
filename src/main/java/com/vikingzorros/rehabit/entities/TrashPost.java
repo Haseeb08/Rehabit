@@ -1,10 +1,7 @@
 package com.vikingzorros.rehabit.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +9,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name="trash_post")
 public class TrashPost {
@@ -24,6 +22,7 @@ public class TrashPost {
     @Column(name = "time")
     private String time;
 
+    @ToString.Exclude
     @OneToOne
     @JoinColumn(name = "posts_id")
     private Post post;

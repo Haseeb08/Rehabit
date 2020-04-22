@@ -1,9 +1,6 @@
 package com.vikingzorros.rehabit.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +9,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name="notification")
 public class Notification {
@@ -30,7 +28,7 @@ public class Notification {
     @Column(name = "time")
     private String time;
 
-//track habit id
+    @ToString.Exclude
     @OneToOne( cascade=CascadeType.ALL,
         fetch = FetchType.LAZY,
         mappedBy = "notification")

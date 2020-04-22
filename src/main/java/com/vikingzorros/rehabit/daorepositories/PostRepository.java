@@ -10,4 +10,5 @@ public interface PostRepository extends JpaRepository<Post,Integer> {
         List<Post> findByCategory_id(int theId);
        //  List<Post> findByCategory_idOrderByCreate_timeDesc(int theId);
 
+
 }

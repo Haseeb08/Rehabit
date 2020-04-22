@@ -1,10 +1,7 @@
 package com.vikingzorros.rehabit.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +9,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name="motivation_message")
 public class MotivationalMessage {
@@ -23,5 +21,11 @@ public class MotivationalMessage {
 
     @Column(name="message")
     private String message;
+
+    @ToString.Exclude
+    @ManyToOne(cascade=CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 }
