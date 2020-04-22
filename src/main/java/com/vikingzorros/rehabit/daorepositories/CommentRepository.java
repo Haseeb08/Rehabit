@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment,Integer> {
 
-    List<Comment> findByPost_id(int theId);
-   // List<Comment> findByPost_idOrderByCreate_timeDesc(int theId);
+    List<Comment> findByPostId(int theId);
+
 }

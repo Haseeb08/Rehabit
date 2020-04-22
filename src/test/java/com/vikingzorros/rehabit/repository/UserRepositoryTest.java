@@ -1,22 +1,21 @@
 package com.vikingzorros.rehabit.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import com.vikingzorros.rehabit.daorepositories.PostRepository;
 import com.vikingzorros.rehabit.daorepositories.UserRepository;
 import com.vikingzorros.rehabit.entities.Post;
 import com.vikingzorros.rehabit.entities.User;
-
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -36,8 +35,6 @@ public class UserRepositoryTest {
         Optional<User> actualUser=userRepository.findById(expectedUser.getId());
         assertThat(actualUser.get()).isEqualTo(expectedUser);
     }
-
-
 
     @Test
     public void testFindAll() {
@@ -64,8 +61,6 @@ public class UserRepositoryTest {
         Optional<User> actualUser=userRepository.findById(expectedUser.getId());
         assertThat(actualUser.get()).isEqualTo(expectedUser);
     }
-
-
 
     @Test
     public void testDeleteUser() {

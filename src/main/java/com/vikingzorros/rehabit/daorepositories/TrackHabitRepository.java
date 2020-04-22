@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TrackHabitRepository extends JpaRepository<TrackHabit,Integer> {
 
-    Post findByPost_id(int theId);
+    Post findByPostId(int theId);
 }
