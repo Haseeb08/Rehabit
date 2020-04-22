@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<!--
-	
--->
-<html lang="en">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title> ReHabit - Change your habits!</title>
@@ -68,9 +66,9 @@
 					</li>
 				</ul>
 				<div class="social-icons-header">
-					<a href="https://www.facebook.com/fh5co"><i class="fab fa-facebook-f"></i></a>
-					<a href="https://freehtml5.co"><i class="fab fa-instagram"></i></a>
-					<a href="https://www.twitter.com/fh5co"><i class="fab fa-twitter"></i></a>
+					<a href=""><i class="fab fa-facebook-f"></i></a>
+					<a href=""><i class="fab fa-instagram"></i></a>
+					<a href=""><i class="fab fa-twitter"></i></a>
 				</div>
 			</div>
 		</nav>
@@ -78,16 +76,18 @@
 			
 		</div>
 		<div id="login" class="login"  >
-			<form class="border border-light p-5">
+			<form class="border border-light p-5" action="processLogin" method="POST">
 
 				<p class="h4 mb-4 text-center">Sign in</p>
+				<p	style="color: red;" th:text=${notMatch}> </p>
+				<label for="defaultLoginFormEmail" >Email</label>
+				<input type="text" name="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail" autocomplete="off" th:value=${emailValue}>
+				<p	style="color: red;" th:text=${emailError}> </p>
 			
-				<label for="defaultLoginFormEmail">Email</label>
-				<input type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
-			
-				<label for="defaultLoginFormPassword">Password</label>
-				<input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
-			
+				<label for="defaultLoginFormPassword"  class="">Password</label>
+				<input  name="password" type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+				<p	style="color: red;" th:text=${passError}> </p>
+
 				<div class="d-flex justify-content-between">
 					<div>
 						<div class="custom-control custom-checkbox">

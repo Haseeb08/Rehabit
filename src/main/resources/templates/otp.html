@@ -2,7 +2,7 @@
 <!--
 	
 -->
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title> ReHabit - Change your habits!</title>
@@ -68,21 +68,23 @@
 					</li>
 				</ul>
 				<div class="social-icons-header">
-					<a href="https://www.facebook.com/fh5co"><i class="fab fa-facebook-f"></i></a>
-					<a href="https://freehtml5.co"><i class="fab fa-instagram"></i></a>
-					<a href="https://www.twitter.com/fh5co"><i class="fab fa-twitter"></i></a>
+					<a href=""><i class="fab fa-facebook-f"></i></a>
+					<a href=""><i class="fab fa-instagram"></i></a>
+					<a href=""><i class="fab fa-twitter"></i></a>
 				</div>
 			</div>
 		</nav>
 
 		<div id="otp" class="otp"  >
-			<form class="border border-light p-5">
+			<form class="border border-light p-5" action="processOtp" method="POST">
 
 				<p class="h4 mb-4 text-center">SMS OTP Verification</p>
-				<p>Dear firstName lastName,please verify account.</p>
+				<p>Dear firstName lastName, please verify account.</p>
 				<label for="defaultLoginFormEmail">Enter OTP</label>
-				<input type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Enter OTP">
-
+				<input name="otpValue" type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Enter OTP" Autocomplete="off">
+		
+			<p	style="color: red;" th:text=${message}> </p>
+			
 				<div class="d-flex justify-content-between">
 					<div>
 						<div class="custom-control custom-checkbox">
