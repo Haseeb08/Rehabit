@@ -2,6 +2,6 @@ package com.vikingzorros.rehabit.service;
 
 public interface AuthService {
 
-    String sendToken();
-    String verifyToken(String otp);
+    boolean sendToken(String phoneNumber);
+    String verifyToken(String phoneNumber,String otp);
 }

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @NoArgsConstructor
-@Builder
 @Setter
 @Getter
 public class AuthServiceImpl implements AuthService {
@@ -21,10 +20,8 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private TwilioConfigurationProperties twilioConfigurationProperties;
 
-    private String phoneNumber;
-
     @Override
-    public String sendToken() {
+    public boolean sendToken(String phoneNumber) {
 
         try {
             Twilio.init(twilioConfigurationProperties.getAccountSid(), twilioConfigurationProperties.getAuthToken());
@@ -36,16 +33,16 @@ public class AuthServiceImpl implements AuthService {
                     .create();
 
             log.info(verification.getStatus());
-            return verification.getStatus();//status is pending for successfully sent otp/token
+            return true;
         }
         catch (ApiException apiException){
-            log.info("====>>>{}",apiException+"");
-            return "";
+            log.error("====>>>{}",apiException+"");
+            return false;
         }
     }
 
     @Override
-    public String verifyToken(String otp) {
+    public String verifyToken(String phoneNumber,String otp) {
 
         try {
             Twilio.init(twilioConfigurationProperties.getAccountSid(), twilioConfigurationProperties.getAuthToken());
@@ -59,7 +56,7 @@ public class AuthServiceImpl implements AuthService {
             // /pending(not matched)/denied(otp timed out)
         }
         catch (ApiException apiException){
-            log.info("====>>>{}",apiException+"");
+            log.error("====>>>{}",apiException+"");
             return "";
         }
 
