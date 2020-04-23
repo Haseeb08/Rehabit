@@ -81,7 +81,7 @@
 				<p class="h4 mb-4 text-center">Sign in</p>
 				<p	style="color: red;" th:text=${notMatch}> </p>
 				<label for="defaultLoginFormEmail" >Email</label>
-				<input type="text" name="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail" autocomplete="off" th:value=${emailValue}>
+				<input type="email" name="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail" autocomplete="off" th:value=${emailValue}>
 				<p	style="color: red;" th:text=${emailError}> </p>
 			
 				<label for="defaultLoginFormPassword"  class="">Password</label>
@@ -104,7 +104,7 @@
 			
 				<div class="text-center">
 					<p>Not a member?
-						<a href="">Register</a>
+						<a href="./signup">Register</a>
 					</p>
 			
 					<p>or sign in with:</p>

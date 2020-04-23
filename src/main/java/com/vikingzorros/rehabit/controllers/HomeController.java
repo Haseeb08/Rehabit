@@ -15,6 +15,11 @@ import javax.validation.Valid;
 @RequestMapping("/Rehabit")
 public class HomeController {
 
+    @RequestMapping("/testdash")
+    public String testdash(){
+        return "dashboarddemo";
+    }
+
     @RequestMapping
     public String homePage(){
         return "home1";

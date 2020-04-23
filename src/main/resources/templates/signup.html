@@ -135,7 +135,7 @@
 			
 				<label for="defaultRegisterFormUserName">User Name</label>
 			
-				<input type="text" id="defaultRegisterFormUserName" class="form-control" placeholder="User Name" th:field="*{userName}">
+				<input type="text" id="defaultRegisterFormUserName" class="form-control" placeholder="User Name" th:field="*{userName}" autocomplete="off">
 				<p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
 			
 				<label for="defaultRegisterFormFirstName">First Name</label>
@@ -158,7 +158,7 @@
 			
 				<label for="defaultRegisterFormPhoneNumber">Phone Number</label>
 			
-				<input type="number" id="defaultRegisterFormPhoneNumber" class="form-control mb-4" placeholder="Phone number" th:field="*{phoneNumber}">
+				<input type="text" id="defaultRegisterFormPhoneNumber" class="form-control mb-4" placeholder="Phone number" th:field="*{phoneNumber}">
 				<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
 			
 			

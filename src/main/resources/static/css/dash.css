@@ -1,0 +1,134 @@
+.dashboard{
+    border:1px solid rgb(10, 10, 10);
+    width:100%;
+    height: 100%;
+    margin:5px;
+    float: top;
+    position:relative;
+  }
+  .user-options{
+    border:1px solid rgb(49, 218, 26);
+    width:15%;
+    height: 100%;
+    margin:5px;
+    float: left;
+    position:relative;
+    background-color: aqua;
+  }
+  
+  .user{
+    border:1px solid rgb(10, 10, 10);
+    width:85%;
+    height: 100%;
+    margin:5px;
+    position: relative;
+    margin-left:15%;
+    background-color: aquamarine;
+  }
+  
+  .profile{
+    border:1px solid rgb(192, 49, 49);
+    width:100%;
+    height: 20%;
+    margin:5px;
+    float:top;
+    position:relative;
+  }
+  .postnacc{
+    border:1px solid rgb(192, 49, 49);
+    width:100%;
+    height: 80%;
+    margin:5px;
+    float:top;
+    position:relative;
+    background-color: rgb(135, 185, 243);
+  }
+  .posts{
+    border:1px solid rgb(192, 49, 49);
+    width:80%;
+    height: 100%;
+    float:left;
+    position:relative;
+  }
+
+  .addpost{
+    border:1px solid rgb(192, 49, 49);
+    width:70%;
+    height: relative;
+    margin-left: 15%;
+    float:top;
+    position:relative;
+  }
+  .previouspost{
+    border:1px solid rgb(192, 49, 49);
+    width:70%;
+    height: relative;
+    margin-left: 15%;
+    float:top;
+    position:relative;
+  }
+  .post{
+    border:1px solid rgb(192, 49, 49);
+    width:80%;
+    height:15%;
+    margin-left: 10%;
+    float:top;
+    position:relative;
+    background-color:rgb(94, 227, 245);
+  }
+  .connect{
+    border:1px solid rgb(192, 49, 49);
+    width:20%;
+    height: 100%;
+
+    margin-left: 80%;
+    position:relative;
+  }
+  .user-friend{
+    border:1px solid rgb(192, 49, 49);
+    width:100%;
+    height: 10%;
+    float: top;
+    position:relative;
+    background-color:rgb(240, 237, 99);
+  }
+  .user-picture{
+    border:1px solid rgb(192, 49, 49);
+    width:20%;
+    height: 100%;
+    margin:0px;
+    float:left;
+    position:relative;
+  }
+  .user-details{
+    border:1px solid rgb(192, 49, 49);
+    width:60%;
+    height: 100%;
+    margin:0px;
+    float:left;
+    position:relative;
+  }
+  .notification {
+    background-color: rgb(111, 141, 241);
+    color: white;
+    text-decoration: none;
+    padding: 5px 20px;
+    position: relative;
+    display: inline-block;
+    border-radius: 20px;
+    float:right;
+  }
+  
+  .notification:hover {
+    background: rgb(236, 147, 147);
+  }
+  
+  .notification .badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }
