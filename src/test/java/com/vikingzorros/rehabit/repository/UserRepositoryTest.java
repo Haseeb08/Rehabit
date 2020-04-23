@@ -28,8 +28,8 @@ public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PostRepository postRepository;
+//    @Autowired
+//    private PostRepository postRepository;
 
     @Test
     public void testSave() {
@@ -117,14 +117,16 @@ public class UserRepositoryTest {
         User user = getUser1();
         Post post = getPost1();
        post.setUser(user);
-        Post thePost = postRepository.save(getPost1());
+
         List<Post> userPosts = new ArrayList<>();
         userPosts.add(post);
         user.setPosts(userPosts);
         User savedUserInDb = userRepository.save(user);
-        Optional<Post> getPostFromDb = postRepository.findById(post.getId());
+
+        List<Post> theposts = savedUserInDb.getPosts();
+
         log.info("User details : {} ",user);
-        assertThat(getPostFromDb.get().getUser()).isEqualTo(savedUserInDb);
+        assertThat(theposts.get(0).getUser()).isEqualTo(savedUserInDb);
     }
 
 }
