@@ -1,6 +1,9 @@
 package com.vikingzorros.rehabit.controllers;
 
 import com.vikingzorros.rehabit.entities.User;
+import com.vikingzorros.rehabit.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,33 +14,49 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+@Slf4j
 @Controller
 @RequestMapping("/Rehabit")
 public class HomeController {
 
-    @RequestMapping("/testdash")
+    @Autowired
+    UserService userService;
+
+    @GetMapping("/testdash")
     public String testdash(){
         return "dashboarddemo";
     }
 
-    @RequestMapping
+    @GetMapping
     public String homePage(){
         return "home1";
     }
 
-    @RequestMapping("/test")
+    @GetMapping("/test")
     public String homePage1(){
         return "home2";
     }
-    @RequestMapping("/dashboard")
+
+    @GetMapping("/dashboard")
     public String showDashboard(){
         return "dashboard";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String processLogin(){
         return "login";
     }
+
+    @GetMapping("/login1")
+    public String processLogin1(){
+        return "login1";
+    }
+
+    @GetMapping("/signout")
+    public String processSignOut(){
+        return "redirect:/Rehabit/";
+    }
+
     @RequestMapping("/signup")
     public String processSignup(Model model){
 
@@ -47,6 +66,45 @@ public class HomeController {
 
         return "signup";
     }
+
+    @PostMapping("/saveUser")
+    public String saveuser(
+            @Valid @ModelAttribute("user") User theUser,
+            BindingResult theBindingResult,
+            Model theModel) {
+
+        String userName = theUser.getUserName();
+        log.info("Processing registration form for:{} " + userName);
+
+        // form validation
+        if (theBindingResult.hasErrors()){
+            return "signup";
+        }
+        else {
+            theUser.setCreateTime(Long.toString(System.currentTimeMillis()));
+            userService.save(theUser);
+
+            log.info("Successfully created user: {} " + userName);
+
+            return "otp";
+        }
+
+//        // check the database if user already exists
+//        User existing = userService.findByUserName(userName);
+//        if (existing != null){
+//            theModel.addAttribute("theUser", new User());
+//            theModel.addAttribute("registrationError", "User name already exists.");
+//
+//            logger.warning("User name already exists.");
+//            return "signup";
+//        }
+
+
+
+    }
+
+
+
 
     @RequestMapping("/otp")
     public String otpPage(Model theModel){
