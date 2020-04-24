@@ -10,13 +10,14 @@ function updateTime(){
         time--;
     }else{
         otpText.innerHTML="<p style='color:red'>OTP expired<p>";
-        resendPass.innerHTML='<a href="" onclick="otpTime()"><b>Resend OTP</b></a>';
+        resendPass.innerHTML='<a href="#" onclick="otpTime()"><b>Resend OTP</b></a>';
         clearInterval(id);
     }
 }
 var id = setInterval(updateTime,1000);
 
 function otpTime() {
+    resendPass.innerHTML='Resend OTP';
     time=expiryTime;
     id = setInterval(updateTime,1000);
 }

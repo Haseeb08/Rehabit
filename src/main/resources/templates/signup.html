@@ -2,7 +2,7 @@
 <!--
 	
 -->
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title> ReHabit - Change your habits!</title>
@@ -76,11 +76,13 @@
 		</nav>
 		
 		<div id="login" class="signup"  >
-			<form class="border border-light p-5">
+			
+		<!--	<form class="border border-light p-5">
 
 				<p class="h4 mb-4 text-center">Sign up</p>
 				<label for="defaultRegisterFormUserName">User Name</label>
 				<input type="text" id="defaultRegisterFormUserName" class="form-control" placeholder="User Name">
+				
 			
 				<label for="defaultRegisterFormFirstName">First Name</label>
 				<input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
@@ -123,7 +125,102 @@
 					<hr>
 			
 				</div>
-			</form>
+			</form> -->
+
+			<form class="border border-light p-5" th:action="@{/Rehabit/processSignup}" th:object="${user}" method="POST">
+
+
+
+				<p class="h4 mb-4 text-center">Sign up</p>
+			
+				<label for="defaultRegisterFormUserName">User Name</label>
+			
+				<input type="text" id="defaultRegisterFormUserName" class="form-control" placeholder="User Name" th:field="*{userName}" autocomplete="off">
+				<p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
+			
+				<label for="defaultRegisterFormFirstName">First Name</label>
+			
+				<input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name" th:field="*{firstName}">
+				<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+			
+			
+				<label for="defaultRegisterFormLastName">Last Name</label>
+			
+				<input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name" th:field="*{lastName}">
+				<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+			
+			
+				<label for="defaultRegisterFormEmail">Email</label>
+			
+				<input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail" th:field="*{email}">
+				<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+			
+			
+				<label for="defaultRegisterFormPhoneNumber">Phone Number</label>
+			
+				<input type="text" id="defaultRegisterFormPhoneNumber" class="form-control mb-4" placeholder="Phone number" th:field="*{phoneNumber}">
+				<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+			
+			
+				<label for="defaultRegisterFormPassword">Password</label>
+			
+				<input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" th:field="*{password}">
+				<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+			
+			
+				<small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">Minimal 8 characters lenght</small>
+			
+			
+			
+				<label for="passwdInput">Re Enter Password </label>
+			
+				<input type="password" id="passwdInput" class="form-control mb-4" placeholder="Password">
+				
+			
+			
+				<button class="btn btn-info my-4 btn-block" type="submit">Sign up</button>
+			
+			
+			
+				<div class="text-center">
+			
+					<p>or sign up with:</p>
+			
+			
+			
+					<a type="button" class="light-blue-text mx-2">
+			
+						<i class="fab fa-facebook-f"></i>
+			
+					</a>
+			
+					<a type="button" class="light-blue-text mx-2">
+			
+						<i class="fab fa-twitter"></i>
+			
+					</a>
+			
+					<a type="button" class="light-blue-text mx-2">
+			
+						<i class="fab fa-linkedin-in"></i>
+			
+					</a>
+			
+					<a type="button" class="light-blue-text mx-2">
+			
+						<i class="fab fa-github"></i>
+			
+					</a>
+			
+			
+			
+					<hr>
+			
+			
+			
+				</div>
+			
+			</form> 
 			
 	
 	</div>
