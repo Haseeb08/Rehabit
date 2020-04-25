@@ -72,16 +72,16 @@
 				</div>
 			</div>
 		</nav>
-		<div id="login" class="loginleft" >
+		<div class="loginleft" >
 			
 		</div>
 		<div id="login" class="login"  >
-			<form class="border border-light p-5" action="processLogin" method="POST">
+			<form class="border border-light p-5" th:action="@{/authenticateTheUser}" th:method="POST">
 
 				<p class="h4 mb-4 text-center">Sign in</p>
 				<p	style="color: red;" th:text=${notMatch}> </p>
-				<label for="defaultLoginFormEmail" >Email</label>
-				<input type="email" name="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail" autocomplete="off" th:value=${emailValue}>
+				<label for="defaultLoginFormEmail" >Username</label>
+				<input type="text" name="username" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Username" autocomplete="off" th:value=${emailValue}>
 				<p	style="color: red;" th:text=${emailError}> </p>
 			
 				<label for="defaultLoginFormPassword"  class="">Password</label>

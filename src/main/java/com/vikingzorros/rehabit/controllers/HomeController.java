@@ -1,6 +1,10 @@
 package com.vikingzorros.rehabit.controllers;
 
-import com.vikingzorros.rehabit.entities.User;
+import com.vikingzorros.rehabit.dto.UserDto;
+
+import com.vikingzorros.rehabit.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,42 +15,93 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+@Slf4j
 @Controller
 @RequestMapping("/Rehabit")
 public class HomeController {
 
-    @RequestMapping("/testdash")
+    @Autowired
+    UserService userService;
+
+    @GetMapping("/testdash")
     public String testdash(){
         return "dashboarddemo";
     }
 
-    @RequestMapping
+    @GetMapping
     public String homePage(){
         return "home1";
     }
 
-    @RequestMapping("/test")
+    @GetMapping("/test")
     public String homePage1(){
         return "home2";
     }
-    @RequestMapping("/dashboard")
+
+    @GetMapping("/dashboard")
     public String showDashboard(){
         return "dashboard";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String processLogin(){
         return "login";
     }
+
+
+    @GetMapping("/signout")
+    public String processSignOut(){
+        return "redirect:/Rehabit/";
+    }
+
     @RequestMapping("/signup")
     public String processSignup(Model model){
 
-        User user = new User();
+        UserDto user = new UserDto();
 
         model.addAttribute("user",user);
 
         return "signup";
     }
+
+    @PostMapping("/saveUser")
+    public String saveuser(
+            @Valid @ModelAttribute("user") UserDto theUserDto,
+            BindingResult theBindingResult,
+            Model theModel) {
+
+        String userName = theUserDto.getUserName();
+        log.info("Processing registration form for:{} " + userName);
+
+        // form validation
+        if (theBindingResult.hasErrors()){
+            return "signup";
+        }
+        else {
+            theUserDto.setCreateTime(Long.toString(System.currentTimeMillis()));
+            userService.save(theUserDto);
+
+            log.info("Successfully created user: {} " + userName);
+
+            return "otp";
+        }
+
+//        // check the database if user already exists
+//        UserDto existing = userService.findByUserDtoName(userName);
+//        if (existing != null){
+//            theModel.addAttribute("theUserDto", new UserDto());
+//            theModel.addAttribute("registrationError", "UserDto name already exists.");
+//
+//            logger.warning("UserDto name already exists.");
+//            return "signup";
+//        }
+
+
+
+    }
+
+
+
 
     @RequestMapping("/otp")
     public String otpPage(Model theModel){
@@ -66,62 +121,13 @@ public class HomeController {
         }else {
             return "otp";
         }
-    }
-
-    @PostMapping("/processLogin")
-    public String processLogin(HttpServletRequest request, Model theModel){
-        String email=request.getParameter("email");
-        String password=request.getParameter("password");
-        if(email!=null){email=email.trim();}
-        if(password!=null){password=password.trim();}
-        if((!email.equals(""))&&(!password.equals(""))) {
-            if(authorizeUser(email,password)){
-                //System.out.println(email+password);
-                return "dashboard";
-            }else{
-                theModel.addAttribute("notMatch","Email and password not matching");
-                return "login";
-            }
-        }else{
-            if(email.equals("")){
-            theModel.addAttribute("emailError","Email cannot be empty"+email);}
-            if(password.equals("")){
-            theModel.addAttribute("emailValue",email);
-            theModel.addAttribute("passError","password cannot be empty"+password);}
-            return "login";
-        }
 
     }
 
-    public boolean authorizeUser(String email,String password){
-        if(email.equals("vamshi@gmail.com")){
-            if(password.equals("1234")){
-                return true;
-            }else{
-                return false;
-            }
-        }
-        else if(email.equals("haseeb@gmail.com")){
-            if(password.equals("1234")){
-                return true;
-            }else{
-                return false;
-            }
-        }
-        else if(email.equals("madhuri@gmail.com")){
-            if(password.equals("1234")){
-                return true;
-            }else{
-                return false;
-            }
-        }else {
-            return false;
-        }
 
-    }
 
     @PostMapping("/processSignup")
-    public String processSignup(@Valid @ModelAttribute("user") User user,
+    public String processSignup(@Valid @ModelAttribute("user") UserDto user,
                                 BindingResult theBindingResult){
         if(theBindingResult.hasErrors()) {
             return "signup";
