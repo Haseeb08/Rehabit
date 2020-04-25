@@ -78,4 +78,13 @@ public class UserServiceImpl implements UserService {
         return userDto;
 
     }
+
+    @Override
+    public UserDto findByPhoneNumber(String phoneNumber) {
+        User user =  userRepository.findByPhoneNumber(phoneNumber);
+        UserDto userDto = null;
+        if(user!=null)
+            userDto = userMapper.convertToDto(user);
+        return userDto;
+    }
 }

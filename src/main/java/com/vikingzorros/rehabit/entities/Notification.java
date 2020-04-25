@@ -29,7 +29,8 @@ public class Notification {
     private String time;
 
     @ToString.Exclude
-    @OneToOne( cascade=CascadeType.ALL,
+    @OneToOne( cascade={CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH},
         fetch = FetchType.LAZY,
         mappedBy = "notification")
     private TrackHabit trackHabit;

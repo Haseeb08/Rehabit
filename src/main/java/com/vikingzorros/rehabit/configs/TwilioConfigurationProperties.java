@@ -1,4 +1,4 @@
-package com.vikingzorros.rehabit.config;
+package com.vikingzorros.rehabit.configs;
 
 import lombok.Getter;
 import lombok.Setter;

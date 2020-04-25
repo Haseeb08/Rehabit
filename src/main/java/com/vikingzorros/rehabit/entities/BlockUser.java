@@ -24,7 +24,9 @@ public class BlockUser {
     private String createTime;
 
     @ToString.Exclude
-    @ManyToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH},
+            fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
 

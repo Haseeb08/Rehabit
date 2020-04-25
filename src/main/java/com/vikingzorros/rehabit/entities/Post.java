@@ -43,7 +43,8 @@ public class Post {
     private List<Comment> commentList;
 
     @ManyToOne(
-            cascade = CascadeType.MERGE,
+            cascade ={CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH},
             fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -53,7 +54,8 @@ public class Post {
             fetch = FetchType.LAZY)
     private List<TrackHabit> trackHabitList;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "category_id")
     private Category category;
 

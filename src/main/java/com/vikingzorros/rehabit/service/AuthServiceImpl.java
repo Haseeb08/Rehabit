@@ -4,7 +4,7 @@ import com.twilio.Twilio;
 import com.twilio.exception.ApiException;
 import com.twilio.rest.verify.v2.service.Verification;
 import com.twilio.rest.verify.v2.service.VerificationCheck;
-import com.vikingzorros.rehabit.config.TwilioConfigurationProperties;
+import com.vikingzorros.rehabit.configs.TwilioConfigurationProperties;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,6 +2,7 @@ package com.vikingzorros.rehabit.controllers;
 
 import com.vikingzorros.rehabit.dto.UserDto;
 
+import com.vikingzorros.rehabit.service.AuthService;
 import com.vikingzorros.rehabit.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.regex.Pattern;
 
 @Slf4j
 @Controller
@@ -21,7 +23,16 @@ import javax.validation.Valid;
 public class HomeController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
+
+    @Autowired
+    private AuthService authService;
+
+    @Autowired
+    private UserValidator userValidator;
+
+    private UserDto sessionUser;
+    private int otpSentCount;
 
     @GetMapping("/testdash")
     public String testdash(){
@@ -48,7 +59,6 @@ public class HomeController {
         return "login";
     }
 
-
     @GetMapping("/signout")
     public String processSignOut(){
         return "redirect:/Rehabit/";
@@ -65,76 +75,95 @@ public class HomeController {
     }
 
     @PostMapping("/saveUser")
-    public String saveuser(
+    public String saveUser(
             @Valid @ModelAttribute("user") UserDto theUserDto,
             BindingResult theBindingResult,
             Model theModel) {
 
-        String userName = theUserDto.getUserName();
-        log.info("Processing registration form for:{} " + userName);
+        if (!theBindingResult.hasErrors()) {
 
-        // form validation
-        if (theBindingResult.hasErrors()){
-            return "signup";
+            if (userValidator.isValid(theUserDto)) {
+
+                sessionUser = theUserDto;
+                if(sendOtp()) {
+                    log.info("otp sent");
+                    otpSentCount = 1;
+                    return "redirect:/Rehabit/otp";
+                }
+            }
+
+            theModel.addAttribute("theUserDto", new UserDto());
+            theModel.addAttribute("registrationError", userValidator.getErrorInfo());
         }
-        else {
-            theUserDto.setCreateTime(Long.toString(System.currentTimeMillis()));
-            userService.save(theUserDto);
-
-            log.info("Successfully created user: {} " + userName);
-
-            return "otp";
-        }
-
-//        // check the database if user already exists
-//        UserDto existing = userService.findByUserDtoName(userName);
-//        if (existing != null){
-//            theModel.addAttribute("theUserDto", new UserDto());
-//            theModel.addAttribute("registrationError", "UserDto name already exists.");
-//
-//            logger.warning("UserDto name already exists.");
-//            return "signup";
-//        }
-
-
-
+        return "signup";
     }
-
-
-
 
     @RequestMapping("/otp")
     public String otpPage(Model theModel){
+
         theModel.addAttribute("test","hi");
+        log.info("redirecting to otp");
         return "otp";
+    }
+
+    @RequestMapping("/resendOtp")
+    public String resendOtpPage(Model theModel){
+
+        if(otpSentCount<5) {
+            otpSentCount++;
+            boolean status = sendOtp();
+            if (status) {
+                log.info("---otp sent");
+                return "redirect:/Rehabit/otp";
+            }
+        }
+        theModel.addAttribute("message","Failed to send otp... please try again after sometime");
+        return "/otp";
+    }
+
+    private boolean sendOtp() {
+        String userPhoneNumber = sessionUser.getPhoneNumber();
+        return authService.sendToken(userPhoneNumber);
     }
 
     @PostMapping("/processOtp")
     public String processOtp(HttpServletRequest request, Model theModel){
-        theModel.addAttribute("message","Wrong OTP entered");
+
+        String errorMessage="";
         String otpValue=request.getParameter("otpValue");
-        if (otpValue==null){
-            return "otp";
+
+        if (otpValue==null|| !(Pattern.matches("[0-9]+", otpValue))){
+            errorMessage = "Otp should contain 6 digits";
         }
-        if (otpValue.equals("1234")){
-            return "dashboard";
-        }else {
-            return "otp";
+        else {
+
+            String userPhoneNumber = sessionUser.getPhoneNumber();
+            log.info("verifying user --->" + sessionUser + "");
+            String otpStatus = authService.verifyToken(userPhoneNumber, otpValue);
+
+            if (otpStatus.equals("approved")) {
+                saveUserToDb();
+                return "dashboard";
+            } else if (otpStatus.equals("pending")) {
+                errorMessage = "Wrong OTP entered";
+            } else {
+                errorMessage = "OTP Timed out";
+            }
         }
+        theModel.addAttribute("message",errorMessage);
+        return "otp";
 
     }
 
+    private void saveUserToDb() {
 
+        sessionUser.setCreateTime(Long.toString(System.currentTimeMillis()));
 
-    @PostMapping("/processSignup")
-    public String processSignup(@Valid @ModelAttribute("user") UserDto user,
-                                BindingResult theBindingResult){
-        if(theBindingResult.hasErrors()) {
-            return "signup";
-        }else {
-            return "otp";
-        }
+        userService.save(sessionUser);
+
+        log.info("Successfully created user: {} " + sessionUser.getUserName());
     }
+
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);

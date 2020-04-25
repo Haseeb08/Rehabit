@@ -28,13 +28,15 @@ public class Category {
     private String description;
 
     @ToString.Exclude
-    @OneToMany(cascade=CascadeType.ALL,
+    @OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH},
             fetch = FetchType.LAZY,
             mappedBy = "category")
     private List<MotivationalMessage> messageList;
 
     @ToString.Exclude
-    @OneToMany(cascade=CascadeType.ALL ,
+    @OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH},
             fetch = FetchType.LAZY,
             mappedBy = "user")
     private List<Post> posts;
