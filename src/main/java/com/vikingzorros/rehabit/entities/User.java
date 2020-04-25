@@ -1,5 +1,6 @@
 package com.vikingzorros.rehabit.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -46,18 +47,21 @@ public class User {
     @OneToMany(cascade=CascadeType.ALL ,
             fetch = FetchType.LAZY,
             mappedBy = "user")
+    @JsonIgnore
     private List<Post> posts;
 
     @ToString.Exclude
     @OneToMany(cascade=CascadeType.ALL ,
             fetch = FetchType.LAZY,
             mappedBy = "user")
+    @JsonIgnore
     private List<Comment> comments;
 
     @ToString.Exclude
     @OneToMany(cascade=CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "user")
-    private List<BlockUser> blockUserList;
+    @JsonIgnore
+   private List<BlockUser> blockUserList;
 
 }

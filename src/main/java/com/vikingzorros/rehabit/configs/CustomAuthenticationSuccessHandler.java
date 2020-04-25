@@ -1,5 +1,6 @@
 package com.vikingzorros.rehabit.configs;
 
+import com.vikingzorros.rehabit.dto.UserDto;
 import com.vikingzorros.rehabit.entities.User;
 import com.vikingzorros.rehabit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		
 		System.out.println("userName=" + userName);
 
-		User theUser = userService.findByUserName(userName);
+		UserDto theUser = userService.findByUserName(userName);
 		
 		// now place in the session
 		HttpSession session = request.getSession();

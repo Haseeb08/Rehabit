@@ -38,11 +38,12 @@ public class Post {
     private int habitCount;
 
     @OneToMany(cascade=CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
+            fetch = FetchType.LAZY,
+            mappedBy = "post")
     private List<Comment> commentList;
 
     @ManyToOne(
+            cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

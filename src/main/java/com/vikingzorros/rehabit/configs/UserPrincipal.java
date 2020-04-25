@@ -1,5 +1,6 @@
 package com.vikingzorros.rehabit.configs;
 
+import com.vikingzorros.rehabit.dto.UserDto;
 import com.vikingzorros.rehabit.entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,9 +11,9 @@ import java.util.Collections;
 
 public class UserPrincipal implements UserDetails {
 
-    private User user;
+    private UserDto user;
 
-    public UserPrincipal(User user) {
+    public UserPrincipal(UserDto user) {
         this.user = user;
     }
 

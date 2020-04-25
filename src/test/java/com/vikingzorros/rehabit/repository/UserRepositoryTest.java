@@ -112,21 +112,21 @@ public class UserRepositoryTest {
     }
 
 // Testing the mapping bw User and Post
-    @Test
-    public void testUserAndPost(){
-        User user = getUser1();
-        Post post = getPost1();
-       post.setUser(user);
-
-        List<Post> userPosts = new ArrayList<>();
-        userPosts.add(post);
-        user.setPosts(userPosts);
-        User savedUserInDb = userRepository.save(user);
-
-        List<Post> theposts = savedUserInDb.getPosts();
-
-        log.info("User details : {} ",user);
-        assertThat(theposts.get(0).getUser()).isEqualTo(savedUserInDb);
-    }
+//    @Test
+//    public void testUserAndPost(){
+//        User user = getUser1();
+//        Post post = getPost1();
+//       post.setUser(user);
+//
+//        List<Post> userPosts = new ArrayList<>();
+//        userPosts.add(post);
+//        user.setPosts(userPosts);
+//        User savedUserInDb = userRepository.save(user);
+//
+//        List<Post> theposts = savedUserInDb.getPosts();
+//
+//        log.info("User details : {} ",user);
+//        assertThat(theposts.get(0).getUser()).isEqualTo(savedUserInDb);
+//    }
 
 }

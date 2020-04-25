@@ -72,11 +72,11 @@
 				</div>
 			</div>
 		</nav>
-		<div id="login" class="loginleft" >
+		<div class="loginleft" >
 			
 		</div>
 		<div id="login" class="login"  >
-			<form class="border border-light p-5" th:action="@{authenticateTheUser}" method="POST">
+			<form class="border border-light p-5" th:action="@{/authenticateTheUser}" th:method="POST">
 
 				<p class="h4 mb-4 text-center">Sign in</p>
 				<p	style="color: red;" th:text=${notMatch}> </p>

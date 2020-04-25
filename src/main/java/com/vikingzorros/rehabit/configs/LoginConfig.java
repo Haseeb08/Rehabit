@@ -42,16 +42,13 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .successHandler(handler)
-                    .loginPage("/Rehabit/login1")
+                    .loginPage("/Rehabit/login")
                     .loginProcessingUrl("/authenticateTheUser")
                     .permitAll()
                 .and()
                 .logout()
                 .logoutSuccessUrl("/Rehabit/dashboard")
                 .permitAll();
-
-
-
     }
 
 
