@@ -8,7 +8,9 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post,Integer> {
 
         List<Post> findByCategoryId(int theId);
-       //  List<Post> findByCategory_idOrderByCreate_timeDesc(int theId);
+
+    List<Post> findAllByUserId(int id);
+
 
 
 }

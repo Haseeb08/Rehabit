@@ -32,7 +32,7 @@ public class Post {
     private String createTime;
 
     @Column(name = "is_anonymous")
-    private boolean isAnonymous;
+    private int isAnonymous;
 
     @Column(name = "habit_count")
     private int habitCount;

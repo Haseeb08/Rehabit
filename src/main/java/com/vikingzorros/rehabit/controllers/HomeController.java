@@ -2,6 +2,11 @@ package com.vikingzorros.rehabit.controllers;
 
 import com.vikingzorros.rehabit.dto.UserDto;
 
+import com.vikingzorros.rehabit.entities.Category;
+import com.vikingzorros.rehabit.entities.Post;
+import com.vikingzorros.rehabit.entities.User;
+import com.vikingzorros.rehabit.objectmappers.UserMapper;
+import com.vikingzorros.rehabit.service.PostService;
 import com.vikingzorros.rehabit.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -22,6 +29,12 @@ public class HomeController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    PostService postService;
+
+    @Autowired
+    UserMapper mapper;
 
     @GetMapping("/testdash")
     public String testdash(){
@@ -38,10 +51,7 @@ public class HomeController {
         return "home2";
     }
 
-    @GetMapping("/dashboard")
-    public String showDashboard(){
-        return "dashboard";
-    }
+
 
     @GetMapping("/login")
     public String processLogin(){
@@ -73,10 +83,20 @@ public class HomeController {
         String userName = theUserDto.getUserName();
         log.info("Processing registration form for:{} " + userName);
 
-        // form validation
-        if (theBindingResult.hasErrors()){
-            return "signup";
-        }
+        //Checking if user is already existing or not
+
+        UserDto existingUserWithEmail = userService.findByEmail(theUserDto.getEmail());
+
+       if(existingUserWithEmail!=null) {
+           String msg = "User already exists with this email";
+            // this msg should be displayed to user on signup page ...
+           return "signup";
+       }
+
+//        // form validation
+//        if (theBindingResult.hasErrors()){
+//            return "signup";
+//        }
         else {
             theUserDto.setCreateTime(Long.toString(System.currentTimeMillis()));
             userService.save(theUserDto);
@@ -99,7 +119,6 @@ public class HomeController {
 
 
     }
-
 
 
 
