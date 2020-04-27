@@ -38,7 +38,7 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
 
         http    .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/Rehabit/").permitAll()
+                .antMatchers("/Rehabit/**").permitAll()
                 .and()
                 .formLogin()
                 .successHandler(handler)

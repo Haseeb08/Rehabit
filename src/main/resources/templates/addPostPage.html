@@ -1,19 +1,20 @@
-<!DOCTYPE HTML>
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<!--
+
+-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>UserHomePage</title>
-    <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <!--    <link rel="stylesheet"-->
-    <!--          href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"-->
-    <!--          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"-->
-    <!--          crossorigin="anonymous">-->
-
-
     <meta charset="UTF-8">
     <title> ReHabit - Change your habits!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,77 +49,30 @@
     <link rel="stylesheet" href="/css/dash.css">
 
     <style>
+        .postArea {
+            display: grid;
+            grid-template-columns: 600px;
+            grid-template-rows: repeat(4, 300px);
+            grid-row-gap: 40px;
+            justify-items: center;
+            justify-content: center;
+            align-items: stretch;
+            align-content: center;
+            grid-auto-rows: 200px;
+            grid-auto-flow: row;
+            overflow: scroll;
+        }
 
-footer {
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	color: white;
-	 position:absolute;
-}
-
-.head {
-	positon: fixed;
-	height: 50px;
-}
-
-ul {
-	display: grid;
-	width: 500px;
-}
-
-.eachPost {
-	border: 2px solid black;
-	margin-top: 15px;
-	box-shadow: 2px;
-	border-radius: 2px;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
-	width: 900px;
-	height:600px
-	margin-left: 200px;
-}
-
-.post-title {
-	text-align: center;
-	font-weight: bold;
-}
-
-.post-description {
-	color: black;
-	height: auto;
-}
-
-main {
-	display: grid;
-	grid-template-columns: 800px;
-	grid-template-rows: auto;
-	grid-row-gap: 40px;
-	justify-items: center;
-	justify-content: center;
-	align-items: stretch;
-	align-content: center;
-	grid-auto-rows: auto;
-	grid-auto-flow: row;
-	margin-right: 200px;
-	height: auto;
-
-
-}
-.postD {
-    overflow: auto;
-}
-
-.eachpost {
-    overflow: scroll;
-}
-
-h3 {
-	font-style: helvatic;
-	padding-left: 5px;
-	padding-top: 20px;
-}
-
-</style>
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            height: 30px;
+            width: 100%;
+            color: white;
+            text-align: center;
+        }
+    </style>
 
 </head>
 
@@ -127,8 +81,12 @@ h3 {
 
 <div id="page-wrap">
 
-    <div id="fh5co-hero-wrapper">
 
+    <!-- ==========================================================================================================
+                                               HERO
+ ========================================================================================================== -->
+
+    <div id="fh5co-hero-wrapper">
         <nav class="container navbar navbar-expand-lg main-navbar-nav navbar-light">
             <a class="navbar-brand" href="/Rehabit">ReHabit</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -140,7 +98,8 @@ h3 {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-items-center ml-auto mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/Rehabit/dashboard">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/Rehabit/dashboard">Home <span
+                                class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Rehabit/profile">Profile</a>
@@ -160,71 +119,211 @@ h3 {
             </div>
         </nav>
 
-
-        <section class="bg-light">
-            <h3>Add new post</h3>
-
-            <div class="addPostFormBox">
-
-
-                <form class="border border-light p-5" th:action="@{/Rehabit/addPost}" th:object="${post}" method="POST">
-
-
-
-                    <p class="h4 mb-4 text-center">Add habit</p>
-
-                    <div class="form-group required">
-                        <label class="control-label" for="defaultRegisterFormUserName">Habit Title</label>
-
-                        <input type="text" id="defaultRegisterFormUserName" class="form-control mb-3 " placeholder="title" th:field="*{title}" autocomplete="off"  required>
+        <div class="dashboard">
+            <div class="user-options">
+                <div class="user-menu">
+                    <ol>
+                        <li>Menu 1</li>
+                        <li>Menu 2</li>
+                        <li>Menu 3</li>
+                        <li>Menu 4</li>
+                        <li>Menu 5</li>
+                        <li>Menu 6</li>
+                        <li>Menu 7</li>
+                        <li>Menu 8</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="user">
+                <div class="profile">
+                    <div class="user-picture">
+                        <img src="" alt="Profile Picture"></img>
                     </div>
-
-                    <div class="form-group required">
-                        <label class="control-label" for="defaultRegisterFormFirstName">Description</label>
-
-                        <textarea id="defaultRegisterFormFirstName" class="form-control mb-3 " placeholder="Text" th:field="*{description}" ></textarea>
-
+<!--                    <div class="user-details">-->
+<!--                        <h4 id="userName">User Name</h4>-->
+<!--                        <ul>-->
+<!--                            <li>Name: First Name Last Name</li>-->
+<!--                            <li>Email: example@test.com </li>-->
+<!--                            <li>Phone Number: 99999 99999</li>-->
+<!--                            <li>Joined: 4 days ago</li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+                    <div class="notify">
+                        <a href="#" class="notification">
+                            <span>Notification</span>
+                            <span class="badge">3</span>
+                        </a>
                     </div>
+                </div>
+                <div class="postnacc">
+                    <div class="posts">
+                        <div class="addpost">
 
-                    <div class="form-group required">
-                        <label class="control-label" for="defaultRegisterFormFirstName">Category</label>
-                    <select th:field="*{category}">
-                        <option th:each="tempcategory : ${categories}" th:value="${tempcategory}" th:text="${tempcategory.name}">
-                        </option>
-                    </select>
+                            <a th:href="@{/Rehabit/postTracker}" class="addPostButton btn btn-primary btn-lg ml-5"> Track your habits</a>
+                            <div class="addPostFormBox">
+
+
+                                <form  th:action="@{/Rehabit/addPost}"
+                                       th:object="${post}" method="POST">
+
+
+
+                                    <p class="h4 mb-4 text-center">Add habit</p>
+
+                                    <div >
+                                        <label class="control-label" for="defaultRegisterFormUserName">Habit
+                                            Title</label>
+
+                                        <input type="text" id="defaultRegisterFormUserName"
+                                               class="form-control mb-3 " placeholder="title" th:field="*{title}"
+                                               autocomplete="off" required>
+                                    </div>
+
+                                    <div class="form-group required">
+                                        <label class="control-label"
+                                               for="defaultRegisterFormFirstName">Description</label>
+
+                                        <textarea id="defaultRegisterFormFirstName" class="form-control mb-3 "
+                                                  placeholder="Text" th:field="*{description}"></textarea>
+
+                                    </div>
+
+                                    <div class="form-group required">
+                                        <label class="control-label"
+                                               for="defaultRegisterFormFirstName">Category</label>
+
+
+                                        <th:block th:object="${category}">
+                                            <label >select category</label>
+
+                                            <select name="categoryName">
+                                                <option value="PUBG" >pubg</option>
+                                                <option value="Tv Addict" >Tv</option>
+                                                <option value="Smoking" >smoking</option>
+
+                                            </select>
+                                        </th:block>
+
+<!--                                       -->
+<!--                                        <select name="category" >-->
+
+<!--                                            <option> Pubg</option>-->
+<!--                                            <option> Pubg</option>-->
+<!--                                            <option> Pubg</option>-->
+
+<!--                                        </select>-->
+
+<!--                                        <select th:field="*{category}">-->
+<!--                                            <option th:each="tempcategory : ${categories}"-->
+<!--                                                    th:value="${tempcategory.name}" th:text="${tempcategory.name}">-->
+<!--                                            </option>-->
+<!--                                        </select>-->
+                                    </div>
+                                    <button class="btn btn-info my-4 btn-block" type="submit">Add Habit</button>
+
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="previouspost">
+
+
+                            <div class="eachPost mb-2 ml-10 text-black rounded" th:each = "post : ${userPosts}" >
+                                <a th:href="@{/Rehabit/commentPage(postId=${post.id})}" class="link-to-commentPage">
+                                    <p class="post-title p-3 bg-dark text-white ">
+                                        <span class="post-username" th:text="${post.user.userName}"></span>
+                                        <span th:text="${post.title}"></span>
+                                        <span class="text-muted mb-3" th:text="${post.createTime}"></span>
+                                    </p>
+                                    <div class="postD"></div>
+                                    <p class="post-description p-3 ">
+                                        <span th:text="${post.description}"></span>
+                                    </p>
+                                </a>
+                            </div>
+
+                            <div class="ffh5co-features-outer">
+
+                                <div class="col-sm-6 in-order-2 sm-6-content wow animated fadeInRight"
+                                     data-wow-delay="0.22s">
+                                    <div class="col-sm-5 wow fadeIn animated" data-wow-delay="0.25s">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button class="btn btn-info my-4 btn-block" type="submit">Add Habit</button>
-
-                </form>
+                    <div class="connect">
+                        <div class="user-friend"></div>
+                        <div class="user-friend"></div>
+                        <div class="user-friend"></div>
+                        <div class="user-friend"></div>
+                        <div class="user-friend"></div>
+                    </div>
+                </div>
             </div>
 
 
-</section>
-                <main>
+
+        </div>
 
 
-
-                    <div class="eachPost mb-2 ml-10 text-black rounded" th:each = "post : ${userPosts}" >
-
-                        <p class="post-title p-3 bg-dark text-white ">
-                            <span th:text="${post.title}"></span>
-                        </p>
-                        <div class="postD"></div>
-                        <p class="post-description p-3 ">
-                             <span th:text="${post.description}"></span>
-                        </p>
-                    </div>
+    </div>
 
 
 
 
-            </main>
-            </div>
+
+<!--    <footer class="footer-outer">-->
+<!--        <div class="container footer-inner">-->
+
+<!--            <div class="footer-three-grid wow fadeIn animated" data-wow-delay="0.66s">-->
+<!--                <div class="column-1-3">-->
+<!--                    <h1>ReHabit</h1>-->
+<!--                </div>-->
+<!--                <div class="column-2-3">-->
+<!--                    <nav class="footer-nav">-->
+<!--                        <ul>-->
+<!--                            <a href="/Rehabit" onclick="$('#fh5co-hero-wrapper').goTo();return false;">-->
+<!--                                <li>Home</li>-->
+<!--                            </a>-->
+<!--                            <a href="/Rehabit/profile" onclick="$('#fh5co-features').goTo();return false;">-->
+<!--                                <li>Profile</li>-->
+<!--                            </a>-->
+<!--                            <a href="/Rehabit/signout" onclick="$('#fh5co-reviews').goTo();return false;">-->
+<!--                                <li>Signout</li>-->
+<!--                            </a>-->
+<!--                            <a href="#" onclick="$('#fh5co-download').goTo();return false;">-->
+<!--                                <li class="active">About</li>-->
+<!--                            </a>-->
+<!--                        </ul>-->
+<!--                    </nav>-->
+<!--                </div>-->
+<!--                <div class="column-3-3">-->
+<!--                    <div class="social-icons-footer">-->
+<!--                        <a href=""><i class="fab fa-facebook-f"></i></a>-->
+<!--                        <a href=""><i class="fab fa-instagram"></i></a>-->
+<!--                        <a href=""><i class="fab fa-twitter"></i></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <span class="border-bottom-footer"></span>-->
+
+<!--            <p class="copyright">&copy; 2020 ReHabit. All rights reserved. Design by <a href=""-->
+<!--                                                                                        target="_blank">VikingZorros</a>.</p>-->
+
+<!--        </div>-->
+<!--    </footer>-->
 
 
+</div> <!-- main page wrapper -->
 
-</div>
-
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/owl.carousel.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/main.js"></script>
 </body>
 
 </html>

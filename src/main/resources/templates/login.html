@@ -79,6 +79,16 @@
 			<form class="border border-light p-5" th:action="@{/authenticateTheUser}" th:method="POST">
 
 				<p class="h4 mb-4 text-center">Sign in</p>
+
+				<div class="form-group">
+					<div class="col-xs-15">
+						<!-- Check for login error -->
+						<div th:if="${param.error}" class="alert alert-danger col-xs-offset-1 col-xs-10">
+							Invalid username or password.
+						</div>
+					</div>
+				</div>
+
 				<p	style="color: red;" th:text=${notMatch}> </p>
 				<label for="defaultLoginFormEmail" >Username</label>
 				<input type="text" name="username" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Username" autocomplete="off" th:value=${emailValue}>

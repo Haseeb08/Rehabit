@@ -1,16 +1,14 @@
 package com.vikingzorros.rehabit.entities;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -53,7 +51,7 @@ public class Post {
             fetch = FetchType.LAZY)
     private List<TrackHabit> trackHabitList;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE},fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
 

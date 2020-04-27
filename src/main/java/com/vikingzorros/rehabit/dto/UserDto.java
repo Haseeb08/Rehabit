@@ -4,6 +4,7 @@ import com.vikingzorros.rehabit.entities.BlockUser;
 import com.vikingzorros.rehabit.entities.Comment;
 import com.vikingzorros.rehabit.entities.Post;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
