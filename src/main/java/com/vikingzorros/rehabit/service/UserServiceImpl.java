@@ -2,6 +2,7 @@ package com.vikingzorros.rehabit.service;
 
 import com.vikingzorros.rehabit.daorepositories.UserRepository;
 import com.vikingzorros.rehabit.dto.UserDto;
+import com.vikingzorros.rehabit.entities.Post;
 import com.vikingzorros.rehabit.entities.User;
 import com.vikingzorros.rehabit.objectmappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,4 +79,5 @@ public class UserServiceImpl implements UserService {
         return userDto;
 
     }
+
 }

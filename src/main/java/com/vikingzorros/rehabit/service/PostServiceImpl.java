@@ -37,10 +37,16 @@ public class PostServiceImpl implements PostService {
 //                log.info("user name of post-->"+post.getUser().getUserName()+"");
 //            }
 //        }
+        List<PostDto> postDtoList = new ArrayList<>();
         for(Post post: posts){
                 log.info("user name of post-->"+post.getUser().getUserName()+"");
+                postDtoList.add(postMapper.convertToDto(post));
         }
-        List<PostDto> postDtoList = postMapper.convertToDtos(posts);
+//        List<PostDto> postDtoList = postMapper.convertToDtos(posts);
+
+        for(PostDto post: postDtoList){
+            log.info("user name of postDto-->"+post.getUser()+"");
+        }
         return postDtoList;
     }
 
@@ -68,9 +74,11 @@ public class PostServiceImpl implements PostService {
     public List<PostDto> findAllByUserId(int id) {
 
         List<Post> posts = postRepository.findAllByUserId(id);
+
         for(Post post: posts){
             log.info("user name of post-->"+post.getUser().getUserName()+"");
         }
+
         List<PostDto> postDtoList = postMapper.convertToDtos(posts);
         return postDtoList;
     }
@@ -96,4 +104,14 @@ public class PostServiceImpl implements PostService {
         List<PostDto> postDtoList = postMapper.convertToDtos(posts);
         return postDtoList;
     }
+//
+//    @Override
+//    public void savePostTrackHabit(int id, TrackHabit trackHabit) {
+//
+//        Optional<Post> post = postRepository.findById(id);
+//        //TrackHabit trackHabit = new TrackHabit();
+//        //trackHabit.setResponse(Integer.parseInt(response));
+//        post.ifPresent(value -> value.getTrackHabitList().add(trackHabit));
+//
+//    }
 }

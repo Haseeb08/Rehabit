@@ -83,6 +83,53 @@ h3 {
     padding-right: 220px;
 }
 
+
+ul {
+  list-style-type:none;
+
+}
+
+
+
+.table {
+
+    width: 60%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+   margin-right: 20%;
+margin-left: 20%;
+margin-top: 10px;
+    }
+
+.heading {
+
+font-weight: bold;
+}
+
+.detail {
+
+}
+.profile-pic {
+width: 400px;
+height: 400px;
+background: url("../img/UserProfile.png");
+backgroung-color: red;
+margin-left: 35%;
+margin-right: 35%;
+}
+
+h4, .h4 {
+
+    font-size: 1.5rem;
+    text-align: center;
+    padding-right: 150px;
+    margin-top: 2%;
+    margin-bottom: 1.5%;
+    font-style: oblique;
+    font-size: xx-large;
+    font-weight: unset;
+   }
 </style>
 
 </head>
@@ -130,15 +177,44 @@ h3 {
 
 
 
-            <hr>
-            <div class="user-details mt-3">
-                <!--        <h4 id="userName" th:text="${user.userName}"></h4>-->
-                <ul>
-                    <li>Name: <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span></li>
-                    <li>Email: <span th:text="${user.email}"></span> </li>
-                    <li>Phone Number: <span th:text="${user.phoneNumber}"></span></li>
-                    <li>Joined: 4 days ago</li>
-                </ul>
+            <div class="profile-pic">
+
+            </div>
+
+            <h4 th:text="${user.userName}"></h4>
+            <div class="user-details-table">
+
+                <table class="table table-striped">
+
+                    <tbody>
+                    <tr>
+                        <td class="heading">First Name</td>
+                        <td class="detail"><span th:text="${user.firstName}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Last Name</td>
+                        <td class="detail"><span th:text="${user.lastName}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="heading">E-mail</td>
+                        <td class="detail"><span th:text="${user.email}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Phone</td>
+                        <td class="detail"><span th:text="${user.phoneNumber}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Created on</td>
+                        <td class="detail"><span th:text="${user.createTime}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="heading">Number of habits</td>
+                        <td class="detail"><span th:text="${user.posts.size()}"></span></td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
             </div>
 
 

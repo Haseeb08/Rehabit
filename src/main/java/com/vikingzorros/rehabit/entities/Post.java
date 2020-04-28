@@ -41,7 +41,7 @@ public class Post {
     private List<Comment> commentList;
 
     @ManyToOne(
-            cascade = CascadeType.MERGE,
+            cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE,CascadeType.REFRESH},
             fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

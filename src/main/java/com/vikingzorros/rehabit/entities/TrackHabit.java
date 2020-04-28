@@ -33,7 +33,7 @@ public class TrackHabit {
     private List<Notification> notificationList ;
 
     @ToString.Exclude
-    @ManyToOne(cascade = CascadeType.ALL,
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.REFRESH},
             fetch = FetchType.LAZY)
     @JoinColumn(name = "posts_id")
     private Post post;

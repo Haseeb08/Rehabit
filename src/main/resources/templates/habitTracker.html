@@ -91,7 +91,7 @@ ul {
 
 main {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr;
 	grid-template-rows: auto;
 	grid-row-gap: 40px;
 	justify-items: center;
@@ -162,9 +162,9 @@ h3 {
 
 
         <section class="bg-light">
-            <h3> Habit Tracker</h3>
+            <h3>Post Habit Tracker</h3>
             <main>
-
+                <span th:if="${message != null}" th:text="${message}"></span>
 
                 <div class="eachPost mb-2 ml-10 text-black rounded" th:each = "post : ${posts}" >
 
@@ -175,9 +175,10 @@ h3 {
                     </p>
                     <div class="postD"></div>
                     <p class="post-description p-3 ">
-						<span>
-							Number of times repeated - <small class="mb-3" th:text="${post.habitCount}"> </small>
-						</span>
+<!--						<span>-->
+<!--							Number of times repeated - <small class="mb-3" th:text="${post.habitCount}"> </small>-->
+<!--						</span>-->
+                    </p>
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -186,15 +187,28 @@ h3 {
                         </tr>
                         </thead>
                         <tbody>
+
                         <tr th:each="trackHabit : ${post.trackHabitList}">
                             <td th:text="${trackHabit.notifyTime}"></td>
                             <td th:text="${trackHabit.response}"></td>
                         </tr>
+                        <tr>
+                            <form th:action="@{|/Rehabit/addTrackHabit/${post.id}|}" th:method="POST">
+                                <!--								<input type="text" th:field="${trackHabit.response}" />-->
+                                <th:block th:object="${trackHabit}">
+                                    <label >select today's status</label>
 
+                                    <select name="response">
+                                        <option value="YES" >YES</option>
+                                        <option value="NO" >NO</option>
+                                    </select>
+                                </th:block>
+                                <input type="submit" value="Submit Respone"/>
+                            </form>
+
+                        </tr>
                         </tbody>
-
                     </table>
-                    </p>
                 </div>
 
 

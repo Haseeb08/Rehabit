@@ -1,19 +1,11 @@
-<!DOCTYPE HTML>
+
+<!DOCTYPE html>
+<!--
+
+-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>UserHomePage</title>
-    <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <!--    <link rel="stylesheet"-->
-    <!--          href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"-->
-    <!--          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"-->
-    <!--          crossorigin="anonymous">-->
-
-
     <meta charset="UTF-8">
     <title> ReHabit - Change your habits!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,11 +42,18 @@
     <style>
 
 
-section {
-    display: block;
-    padding-left: 430px;
-    padding-top: 20px;
-}
+.addpost {
+
+    width: 40%;
+    height: relative;
+    margin-left: 15%;
+    float: top;
+    position: initial;
+    margin-left: 530px;
+    }
+
+post-username {
+color: red;
 }
 footer {
 	left: 0;
@@ -80,7 +79,7 @@ ul {
 	box-shadow: 2px;
 	border-radius: 2px;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
-	width: 900px;
+	width: 780px;
 	height:600px
 	margin-left: 200px;
 }
@@ -97,18 +96,18 @@ ul {
 
 main {
 	display: grid;
-	grid-template-columns: 800px ;
-	grid-template-rows: auto;
-	grid-col-gap: 80px;
-	grid-row-gap: 80px;
-	justify-items: center;
-	justify-content: center;
-	align-items: stretch;
-	align-content: center;
-	grid-auto-rows: auto;
-	grid-auto-flow: row;
-	margin-right: 200px;
-	height: auto;
+grid-template-columns: 800px;
+grid-template-rows: auto;
+grid-row-gap: 60px;
+justify-items: center;
+justify-content: center;
+align-items: stretch;
+align-content: center;
+grid-auto-rows: auto;
+grid-auto-flow: row;
+margin-right: 200px;
+height: auto;
+margin-left: 200px;
 
 
 }
@@ -141,24 +140,17 @@ h3 {
 }
 
 h3 {
-    padding-left: 300px;
+    text-align: center;
+    padding-right: 200px;
 }
-
-textarea {
-    overflow-y: scroll;
- }
-
- button {
-
- margin-left: 350px;
-margin-top: 20px;
- }
-</style>
+.addButton {
+    margin-left: 300px;
+}
+    </style>
 
 </head>
 
 <body>
-
 
 <div id="page-wrap">
 
@@ -195,54 +187,87 @@ margin-top: 20px;
             </div>
         </nav>
 
-
-        <section class="bg-light">
-
+<section>
 
 
+    <div class="addpost">
 
-            <div class="post-comments">
+        <a th:href="@{/Rehabit/postTracker}" class="addPostButton btn btn-primary btn-lg ml-5"> Track your habits</a>
+        <div class="addPostFormBox">
 
-                <div class="eachPost mu-4 mb-2  text-black rounded"  >
+            <form  th:action="@{/Rehabit/addPost}"
+                   th:object="${post}" method="POST">
+                <p class="h4 mb-4 text-center">Add habit</p>
+                <div >
+                    <label class="control-label" for="defaultRegisterFormUserName">Habit
+                        Title</label>
 
-                    <p class="post-title p-3 bg-dark text-white ">
-                        <!--                            <span class="post-username" th:text="${post.user.userName}"></span>-->
-                        <span th:text="${post.title}"></span>
-                        <span class="text-muted mb-3" th:text="${post.createTime}"></span>
-                    </p>
-                    <div class="postD"></div>
-                    <p class="post-description p-3 ">
-                        <span th:text="${post.description}"></span>
-                    </p>
+                    <input type="text" id="defaultRegisterFormUserName"
+                           class="form-control mb-3 " placeholder="title" th:field="*{title}"
+                           autocomplete="off" required>
                 </div>
-            </div>
+                <div class="form-group required">
+                    <label class="control-label"
+                           for="defaultRegisterFormFirstName">Description</label>
+                    <textarea id="defaultRegisterFormFirstName" class="form-control mb-3 "
+                              placeholder="Text" th:field="*{description}"></textarea>
 
-            <div class="comment-form">
-                <h3>Add a comment</h3>
-                <form th:action="@{/Rehabit/addComment(postId=${post.id})}"  method="post">
+                </div>
 
+                <div class="form-group required">
+                    <label class="control-label"
+                           for="defaultRegisterFormFirstName">Category</label>
 
-                    <textarea th:field="${comment.message}" rows="4" cols="76"> </textarea>
+                    <th:block th:object="${category}">
+                        <label >select category</label>
+
+                        <select name="categoryName">
+                            <option value="PUBG" >pubg</option>
+                            <option value="Tv Addict" >Tv</option>
+                            <option value="Smoking" >smoking</option>
+
+                        </select>
+                    </th:block>
                     <br>
-                    <button class="btn btn-info mu-2 " type="submit">Add Comment</button>
+                </div>
+                <button class="btn addButton btn-info my-4 " type="submit">Add Habit</button>
 
-                </form>
-            </div>
+            </form>
+        </div>
+    </div>
 
-            <div class="eachPost mb-2 ml-10 text-black rounded" th:each = "comment : ${comments}" >
-                <div class="postD"></div>
-                <p class="post-description p-3 ">
-                    <span th:text="${comment.message}"></span>
-                <p><span class="comment-username" th:text="${comment.user.userName}">username</span></p>
-                <span class="text-muted mb-3" th:text="${comment.createTime}"></span>
-                </p>
+<!--    <div class="eachPost mb-2 ml-10 text-black rounded" th:each = "post : ${userPosts}" >-->
+<!--        <a th:href="@{/Rehabit/commentPage(postId=${post.id})}" class="link-to-commentPage">-->
+<!--            <p class="post-title p-3 bg-dark text-white ">-->
+<!--                <span class="post-username" th:text="${post.user.userName}"></span>-->
+<!--                <span th:text="${post.title}"></span>-->
+<!--                <span class="text-muted mb-3" th:text="${post.createTime}"></span>-->
+<!--            </p>-->
+<!--            <div class="postD"></div>-->
+<!--            <p class="post-description p-3 ">-->
+<!--                <span th:text="${post.description}"></span>-->
+<!--            </p>-->
+<!--        </a>-->
+<!--    </div>-->
+    <main>
+    <div class="eachPost mb-2 ml-10 text-black rounded" th:each = "post : ${userPosts}" >
+        <a th:href="@{/Rehabit/commentPage(postId=${post.id})}" class="link-to-commentPage">
+            <p class="post-title p-3 bg-dark text-white ">
+                <span class="text-muted mb-3" th:text="${post.user.userName}"></span>
+                <span th:text="${post.title}"></span>
+                <span class="text-muted mb-3" th:text="${post.createTime}"></span>
+            </p>
+            <div class="postD"></div>
+            <p class="post-description p-3 ">
+                <span th:text="${post.description}"></span>
+            </p>
+        </a>
+    </div>
+    </main>
 
-            </div>
+</section>
 
-        </section>
     </div>
 </div>
-
 </body>
-
 </html>

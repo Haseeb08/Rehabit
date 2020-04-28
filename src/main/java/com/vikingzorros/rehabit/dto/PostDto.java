@@ -1,11 +1,9 @@
 package com.vikingzorros.rehabit.dto;
 
-import com.vikingzorros.rehabit.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class PostDto {
 
     private String createTime;
 
-    private boolean isAnonymous;
+    private int isAnonymous;
 
     private int habitCount;
 
