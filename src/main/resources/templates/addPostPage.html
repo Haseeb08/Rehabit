@@ -1,17 +1,5 @@
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
-<!--
 
--->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -22,16 +10,6 @@
     <meta name="keywords" content="" />
     <meta name="author" content="" />
 
-    <!-- Facebook and Twitter integration -->
-    <meta property="og:title" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:site_name" content="" />
-    <meta property="og:description" content="" />
-    <meta name="twitter:title" content="" />
-    <meta name="twitter:image" content="" />
-    <meta name="twitter:url" content="" />
-    <meta name="twitter:card" content="" />
 
     <!-- Bootstrap  -->
     <link rel="stylesheet" href="/css/bootstrap.css">
@@ -48,45 +26,20 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/dash.css">
 
-    <style>
-        .postArea {
-            display: grid;
-            grid-template-columns: 600px;
-            grid-template-rows: repeat(4, 300px);
-            grid-row-gap: 40px;
-            justify-items: center;
-            justify-content: center;
-            align-items: stretch;
-            align-content: center;
-            grid-auto-rows: 200px;
-            grid-auto-flow: row;
-            overflow: scroll;
-        }
-
-        footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            height: 30px;
-            width: 100%;
-            color: white;
-            text-align: center;
-        }
-    </style>
-
+    
 </head>
 
 <body>
 
 
-<div id="page-wrap">
+<div id="page-wrap" class="page-mod">
 
 
     <!-- ==========================================================================================================
                                                HERO
  ========================================================================================================== -->
 
-    <div id="fh5co-hero-wrapper">
+    <div id="fh5co-hero-wrapper" >
         <nav class="container navbar navbar-expand-lg main-navbar-nav navbar-light">
             <a class="navbar-brand" href="/Rehabit">ReHabit</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -159,68 +112,47 @@
                     <div class="posts">
                         <div class="addpost">
 
-                            <a th:href="@{/Rehabit/postTracker}" class="addPostButton btn btn-primary btn-lg ml-5"> Track your habits</a>
+                            
                             <div class="addPostFormBox">
 
-
-                                <form  th:action="@{/Rehabit/addPost}"
-                                       th:object="${post}" method="POST">
-
-
-
+                                <p style="text-align: center"><a th:href="@{/Rehabit/postTracker}" class="addPostButton btn btn-primary btn-lg ml-5"> Track your habits</a>
+                                </p>
+                                <form th:action="@{/Rehabit/addPost}" th:object="${post}" method="POST" style="text-align: center">
                                     <p class="h4 mb-4 text-center">Add habit</p>
-
-                                    <div >
+                                    <div>
                                         <label class="control-label" for="defaultRegisterFormUserName">Habit
                                             Title</label>
-
-                                        <input type="text" id="defaultRegisterFormUserName"
-                                               class="form-control mb-3 " placeholder="title" th:field="*{title}"
-                                               autocomplete="off" required>
+                                
+                                        <input type="text" id="defaultRegisterFormUserName" class="" placeholder="title" th:field="*{title}"
+                                            autocomplete="off" required>
                                     </div>
-
-                                    <div class="form-group required">
-                                        <label class="control-label"
-                                               for="defaultRegisterFormFirstName">Description</label>
-
-                                        <textarea id="defaultRegisterFormFirstName" class="form-control mb-3 "
-                                                  placeholder="Text" th:field="*{description}"></textarea>
-
+                                
+                                    <div class="">
+                                        <label class="" for="defaultRegisterFormFirstName">Description</label>
+                                
+                                        <textarea id="defaultRegisterFormFirstName" class="" placeholder="Text" th:field="*{description}"></textarea>
+                                
                                     </div>
-
-                                    <div class="form-group required">
-                                        <label class="control-label"
-                                               for="defaultRegisterFormFirstName">Category</label>
-
-
+                                
+                                    <div class="">
+                                        <label class="" for="defaultRegisterFormFirstName">Category</label>
+                                
+                                
                                         <th:block th:object="${category}">
-                                            <label >select category</label>
-
+                                            <label>select category</label>
+                                
                                             <select name="categoryName">
-                                                <option value="PUBG" >pubg</option>
-                                                <option value="Tv Addict" >Tv</option>
-                                                <option value="Smoking" >smoking</option>
-
+                                                <option value="PUBG">pubg</option>
+                                                <option value="Tv Addict">Tv</option>
+                                                <option value="Smoking">smoking</option>
+                                
                                             </select>
                                         </th:block>
-
-<!--                                       -->
-<!--                                        <select name="category" >-->
-
-<!--                                            <option> Pubg</option>-->
-<!--                                            <option> Pubg</option>-->
-<!--                                            <option> Pubg</option>-->
-
-<!--                                        </select>-->
-
-<!--                                        <select th:field="*{category}">-->
-<!--                                            <option th:each="tempcategory : ${categories}"-->
-<!--                                                    th:value="${tempcategory.name}" th:text="${tempcategory.name}">-->
-<!--                                            </option>-->
-<!--                                        </select>-->
+                                
+                                
                                     </div>
-                                    <button class="btn btn-info my-4 btn-block" type="submit">Add Habit</button>
-
+                                    <button class="myButton" type="submit">Add Habit</button>
+                                
                                 </form>
                             </div>
 
@@ -274,48 +206,39 @@
 
 
 
-<!--    <footer class="footer-outer">-->
-<!--        <div class="container footer-inner">-->
 
-<!--            <div class="footer-three-grid wow fadeIn animated" data-wow-delay="0.66s">-->
-<!--                <div class="column-1-3">-->
-<!--                    <h1>ReHabit</h1>-->
-<!--                </div>-->
-<!--                <div class="column-2-3">-->
-<!--                    <nav class="footer-nav">-->
-<!--                        <ul>-->
-<!--                            <a href="/Rehabit" onclick="$('#fh5co-hero-wrapper').goTo();return false;">-->
-<!--                                <li>Home</li>-->
-<!--                            </a>-->
-<!--                            <a href="/Rehabit/profile" onclick="$('#fh5co-features').goTo();return false;">-->
-<!--                                <li>Profile</li>-->
-<!--                            </a>-->
-<!--                            <a href="/Rehabit/signout" onclick="$('#fh5co-reviews').goTo();return false;">-->
-<!--                                <li>Signout</li>-->
-<!--                            </a>-->
-<!--                            <a href="#" onclick="$('#fh5co-download').goTo();return false;">-->
-<!--                                <li class="active">About</li>-->
-<!--                            </a>-->
-<!--                        </ul>-->
-<!--                    </nav>-->
-<!--                </div>-->
-<!--                <div class="column-3-3">-->
-<!--                    <div class="social-icons-footer">-->
-<!--                        <a href=""><i class="fab fa-facebook-f"></i></a>-->
-<!--                        <a href=""><i class="fab fa-instagram"></i></a>-->
-<!--                        <a href=""><i class="fab fa-twitter"></i></a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+	<div class="footer-outer">
+		<div class="container footer-inner">
 
-<!--            <span class="border-bottom-footer"></span>-->
+			<div class="footer-three-grid wow fadeIn animated" data-wow-delay="0.66s">
+				<div class="column-1-3">
+					<h1>ReHabit</h1>
+				</div>
+				<div class="column-2-3">
+					<nav class="footer-nav">
+						<ul>
+							<a href="#" onclick="$('#fh5co-hero-wrapper').goTo();return false;"><li>Home</li></a>
+							<a href="#" onclick="$('#fh5co-features').goTo();return false;"><li>Login</li></a>
+							<a href="#" onclick="$('#fh5co-reviews').goTo();return false;"><li>Signup</li></a>
+							<a href="#" onclick="$('#fh5co-download').goTo();return false;"><li class="active">About</li></a>
+						</ul>
+					</nav>
+				</div>
+				<div class="column-3-3">
+					<div class="social-icons-footer">
+						<a href=""><i class="fab fa-facebook-f"></i></a>
+						<a href=""><i class="fab fa-instagram"></i></a>
+						<a href=""><i class="fab fa-twitter"></i></a>
+					</div>
+				</div>
+			</div>
 
-<!--            <p class="copyright">&copy; 2020 ReHabit. All rights reserved. Design by <a href=""-->
-<!--                                                                                        target="_blank">VikingZorros</a>.</p>-->
+			<span class="border-bottom-footer"></span>
 
-<!--        </div>-->
-<!--    </footer>-->
+			<p class="copyright">&copy; 2020 ReHabit. All rights reserved. Design by <a href="" target="_blank">VikingZorros</a>.</p>
 
+		</div>
+	</div>
 
 </div> <!-- main page wrapper -->
 
