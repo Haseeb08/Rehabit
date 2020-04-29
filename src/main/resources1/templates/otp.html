@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-
+<!--
+	
+-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
@@ -27,8 +29,8 @@
 	<link rel="stylesheet" href="/css/owl.theme.default.min.css">
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="/css/animate.css">
-	
-	
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="/css/style.css">
@@ -72,64 +74,35 @@
 				</div>
 			</div>
 		</nav>
-		<div class="loginleft" >
+
+		<div id="otp" class="otp"  >
+			<form class="border border-light p-5" action="processOtp" method="POST">
+
+				<p class="h4 mb-4 text-center">SMS OTP Verification</p>
+				<p>Dear firstName lastName, please verify account.</p>
+				<label for="defaultLoginFormEmail">Enter OTP</label>
+				<input name="otpValue" type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Enter OTP" Autocomplete="off">
+		
+			<p	style="color: red;" th:text=${message}> </p>
 			
-		</div>
-		<div id="login" class="login"  >
-			<form class="border border-light p-5" th:action="@{/authenticateTheUser}" th:method="POST">
-
-				<p class="h4 mb-4 text-center">Sign in</p>
-
-				<div class="form-group">
-					<div class="col-xs-15">
-						<!-- Check for login error -->
-						<div th:if="${param.error}" class="alert alert-danger col-xs-offset-1 col-xs-10">
-							Invalid username or password.
-						</div>
-					</div>
-				</div>
-
-				<p	style="color: red;" th:text=${notMatch}> </p>
-				<label for="defaultLoginFormEmail" >Username</label>
-				<input type="text" name="username" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Username" autocomplete="off" th:value=${emailValue}>
-				<p	style="color: red;" th:text=${emailError}> </p>
-			
-				<label for="defaultLoginFormPassword"  class="">Password</label>
-				<input  name="password" type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
-				<p	style="color: red;" th:text=${passError}> </p>
-
 				<div class="d-flex justify-content-between">
 					<div>
 						<div class="custom-control custom-checkbox">
-							<input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-							<label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+
+							<label id="otptime" class="custom-control-label" ></label>
 						</div>
 					</div>
-					<div>
-						<a href="">Forgot password?</a>
+					<div id="resend">
+						Resend OTP
 					</div>
 				</div>
 			
-				<button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+				<button class="btn btn-info btn-block my-4" type="submit">Verify</button>
 			
 				<div class="text-center">
-					<p>Not a member?
-						<a href="./signup">Register</a>
-					</p>
-			
-					<p>or sign in with:</p>
-					<a type="button" class="light-blue-text mx-2">
-						<i class="fab fa-facebook-f"></i>
-					</a>
-					<a type="button" class="light-blue-text mx-2">
-						<i class="fab fa-twitter"></i>
-					</a>
-					<a type="button" class="light-blue-text mx-2">
-						<i class="fab fa-linkedin-in"></i>
-					</a>
-					<a type="button" class="light-blue-text mx-2">
-						<i class="fab fa-github"></i>
-					</a>
+
+					<p>Please verify your account.</p>
+
 				</div>
 			</form>
 			
@@ -228,5 +201,6 @@
 	<script src="/js/owl.carousel.js"></script>
 	<script src="/js/wow.min.js"></script>
 	<script src="/js/main.js"></script>
+	<script src="/js/local.js"></script>
 </body>
 </html>

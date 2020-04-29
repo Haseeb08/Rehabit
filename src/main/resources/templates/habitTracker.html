@@ -61,29 +61,39 @@
         </div>
         <div class="content">
             <div class="posts">
-                              
+                <h1>Habit Tracks</h1>          
 
-                <div class="post" th:each = "post : ${allPosts}">
-                    <div class="post-meta">
-                        
-                        <div class="prof-pic">
-                            <a href=""><img src="/img/profile.png" class="pimg"/></a>
+               
+                <div class="post mb-2 ml-10 text-blue rounded" th:each="post : ${posts}">
 
-                        </div>
-                        <div class="user-name">
-                            <a href=""> <b><p th:text="${post.user.userName}+${'  ▶'}"></p></b></a>
-                        </div> 
-                        <div class="post-title">
-                            <a th:href="@{/Rehabit/commentPage(postId=${post.id})}"> <b><p th:text="${post.title}">Dont play pubg</p></b></a>
-                        </div>
-                    </div>
-                    <div class="post-desc">
-                       <p th:text="${post.description}"> </p>
-                    </div>
-                    <div class="post-comment">
+                    <p class="post-title p-3 bg-dark text-white ">
+                        <span th:text="${post.user.userName}"></span>
+                        <span th:text="${post.title}"></span>
+                        <span class="text-muted mb-3" th:text="${post.createTime}"></span>
+                    </p>
+                    <div class="postD"></div>
+                    <p class="post-description p-3 ">
+                        <span>
+                            Number of times repeated - <small class="mb-3" th:text="${post.habitCount}">
+                            </small>
+                        </span>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>notify time</th>
+                                    <th>response</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="trackHabit : ${post.trackHabitList}">
+                                    <td th:text="${trackHabit.notifyTime}"></td>
+                                    <td th:text="${trackHabit.response}"></td>
+                                </tr>
 
-                    </div>
-                    
+                            </tbody>
+
+                        </table>
+                    </p>
                 </div>
 
                 

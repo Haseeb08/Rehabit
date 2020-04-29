@@ -61,9 +61,58 @@
         </div>
         <div class="content">
             <div class="posts">
-                              
+                <div class="addform">
+                    <div class="addPostFormBox">
 
-                <div class="post" th:each = "post : ${allPosts}">
+                        <p style="text-align: center"><a th:href="@{/Rehabit/postTracker}" class="addPostButton btn btn-primary btn-lg ml-5"> Track My Habits</a>
+                        </p>
+                        
+                            
+                        <form th:action="@{/Rehabit/addPost}" th:object="${post}" method="POST" style="text-align: center">
+                            <p class="h4 mb-4 text-center">Add habit</p>
+                            <div>
+                                <label class="control-label" for="defaultRegisterFormUserName">Habit
+                                    Title</label>
+                        
+                                <input type="text" id="defaultRegisterFormUserName" class="" placeholder="title" th:field="*{title}"
+                                    autocomplete="off" required>
+                            </div>
+                        
+                            <div class="">
+                                <label class="" for="defaultRegisterFormFirstName">Description</label>
+                        
+                                <textarea id="defaultRegisterFormFirstName" class="" placeholder="Text" th:field="*{description}"></textarea>
+                        
+                            </div>
+                        
+                            <div class="">
+                                <label class="" for="defaultRegisterFormFirstName">Category</label>
+                        
+                        
+                                <th:block th:object="${category}">
+                                    <label>select category</label>
+                        
+                                    <select name="categoryName">
+                                        <option value="PUBG">pubg</option>
+                                        <option value="Tv Addict">Tv</option>
+                                        <option value="Smoking">smoking</option>
+                        
+                                    </select>
+                                </th:block>
+                        
+                        
+                            </div>
+                            <button class="myButton" type="submit">Add Habit</button>
+                        
+                        </form>
+                    </div>
+
+                    
+
+                </div>
+                
+
+                <div class="post" th:each = "post : ${userPosts}">
                     <div class="post-meta">
                         
                         <div class="prof-pic">
@@ -71,14 +120,14 @@
 
                         </div>
                         <div class="user-name">
-                            <a href=""> <b><p th:text="${post.user.userName}+${'  ▶'}"></p></b></a>
+                            <a href=""> <b><p th:text="${post.user.userName}+${'  ▶'}">Ronni Daniel</p></b></a>
                         </div> 
                         <div class="post-title">
                             <a th:href="@{/Rehabit/commentPage(postId=${post.id})}"> <b><p th:text="${post.title}">Dont play pubg</p></b></a>
                         </div>
                     </div>
                     <div class="post-desc">
-                       <p th:text="${post.description}"> </p>
+                       <p th:text="${post.description}"> “Feeling sorry for yourself, and your present condition, is not only a waste of energy but the worst habit you could possibly have.” ~ Dale Carnegie.</p>
                     </div>
                     <div class="post-comment">
 

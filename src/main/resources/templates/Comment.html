@@ -61,9 +61,50 @@
         </div>
         <div class="content">
             <div class="posts">
-                              
+                <div class="addform">
+                    <div class="post">
+                        <div class="post-meta">
+                    
+                            <div class="prof-pic">
+                                <a href=""><img src="/img/profile.png" class="pimg" /></a>
+                    
+                            </div>
+                            <div class="user-name">
+                                <a href=""> <b>
+                                        <p th:text="${post.user.userName}+${'  ▶'}"></p>
+                                    </b></a>
+                            </div>
+                            <div class="post-title">
+                                <a th:href="@{/Rehabit/commentPage(postId=${post.id})}"> <b>
+                                        <p th:text="${post.title}">Dont play pubg</p>
+                                    </b></a>
+                            </div>
+                        </div>
+                        <div class="post-desc">
+                            <p th:text="${post.description}"> </p>
+                        </div>
+                        <div class="post-comment">
+                            <div class="comment-form">
+                                <form th:action="@{/Rehabit/addComment(postId=${post.id})}" method="post">
+                        
+                        
+                                    <textarea th:field="${comment.message}"  rows="3" cols="45"> </textarea>
+                                    <br>
+                                    <button class="myButton" type="submit">Add Comment</button>
+                        
+                                </form>
+                            </div>
+        
+                    
+                        </div>
+                    
+                    </div>   
+                    
 
-                <div class="post" th:each = "post : ${allPosts}">
+                </div>
+                
+
+                <div class="post" th:each = "comment : ${comments}">
                     <div class="post-meta">
                         
                         <div class="prof-pic">
@@ -71,18 +112,14 @@
 
                         </div>
                         <div class="user-name">
-                            <a href=""> <b><p th:text="${post.user.userName}+${'  ▶'}"></p></b></a>
+                            <a href=""> <b><p th:text="${comment.user.userName}"></p></b></a>
                         </div> 
-                        <div class="post-title">
-                            <a th:href="@{/Rehabit/commentPage(postId=${post.id})}"> <b><p th:text="${post.title}">Dont play pubg</p></b></a>
-                        </div>
+                       
                     </div>
                     <div class="post-desc">
-                       <p th:text="${post.description}"> </p>
+                       <p th:text="${comment.message}"> </p>
                     </div>
-                    <div class="post-comment">
-
-                    </div>
+                    
                     
                 </div>
 
