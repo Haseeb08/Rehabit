@@ -48,10 +48,10 @@ public class CommentServiceImpl implements  CommentService{
     }
 
     @Override
-    public List<CommentDto> findByPost(PostDto post) {
+    public List<Comment> findByPost(PostDto post) {
         List<Comment> commentList = commentRepository.findByPostId(post.getId());
-        List<CommentDto> commentDtoList = commentMapper.convertToDtos(commentList);
+        //List<CommentDto> commentDtoList = commentMapper.convertToDtos(commentList);
 
-        return commentDtoList;
+        return commentList;
     }
 }

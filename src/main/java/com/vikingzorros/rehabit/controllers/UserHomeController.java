@@ -100,7 +100,7 @@ public class UserHomeController {
 
         PostDto post = postService.findById(postId);
         post.setCreateTime(TimeController.convert(post.getCreateTime()));
-        List<CommentDto> commentDtoList = commentService.findByPost(post);
+        List<Comment> commentDtoList = commentService.findByPost(post);
         commentDtoList = getCommentTime(commentDtoList);
         Comment comment = new Comment();
         theModel.addAttribute("post",post);
@@ -209,10 +209,10 @@ public class UserHomeController {
         }
         return postDtos;
     }
-    private List<CommentDto> getCommentTime(List<CommentDto> commentDtos){
+    private List<Comment> getCommentTime(List<Comment> commentDtos){
 
-        for(CommentDto commentDto: commentDtos){
-            log.info(" In Dashboard user name of post-->"+commentDto.getUser().getUserName()+"");
+        for(Comment commentDto: commentDtos){
+            log.info(" In Dashboard user name of comment-->"+commentDto.getUser().getUserName()+"");
             String time1 = TimeController.convert(commentDto.getCreateTime());
             commentDto.setCreateTime(time1);
         }

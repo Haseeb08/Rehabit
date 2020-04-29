@@ -13,5 +13,5 @@ public interface CommentService {
     CommentDto findById(int id);
     void save(CommentDto comment);
     void deleteById(int id);
-    List<CommentDto> findByPost(PostDto post);
+    List<Comment> findByPost(PostDto post);
 }
