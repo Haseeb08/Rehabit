@@ -38,7 +38,7 @@ public class Post {
     private int habitCount;
 
     @OneToMany(cascade=CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "post")
     private List<Comment> commentList;
 

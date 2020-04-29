@@ -39,16 +39,17 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
 
         http    .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/Rehabit/**").permitAll()
+                .antMatchers("/Rehabit/","/Rehabit/login","/Rehabit/signup").permitAll()
+                .antMatchers("/Rehabit/**").authenticated()
                 .and()
                 .formLogin()
                 .successHandler(handler)
-                    .loginPage("/Rehabit/login")
-                    .loginProcessingUrl("/authenticateTheUser")
-                    .permitAll()
+                .loginPage("/Rehabit/login")
+                .loginProcessingUrl("/authenticateTheUser")
+                .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/Rehabit/dashboard")
+                .logoutSuccessUrl("/Rehabit/")
                 .permitAll();
     }
 

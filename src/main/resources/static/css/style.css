@@ -96,7 +96,7 @@ background: #f7f7f7
   align-items:center;
  
  
- background: url("../img/userprofile2.png") ;
+ background: url("../img/login1.jpg") ;
  margin-left: 20%;
 
 }
@@ -154,7 +154,7 @@ margin-left: 10%;
 .main-navbar-nav .nav-link {
   opacity: 1 !important;
   margin: 0 35px;
-  font-size: 14.5px;
+  font-size: 18px;
   font-weight: 500;
 }
 
@@ -184,7 +184,7 @@ margin-left: 10%;
 }
 .fh5co-hero-inner > p {
   width: 400px;
-  font-size: 14px;
+  font-size: 18px;
   color: #fff;
   margin-top: 30px;
   margin-bottom: 30px;

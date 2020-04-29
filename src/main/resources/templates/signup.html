@@ -29,8 +29,8 @@
 	<link rel="stylesheet" href="/css/owl.theme.default.min.css">
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="/css/animate.css">
-	<!-- Font Awesome -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	
+	
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="/css/style.css">
@@ -140,49 +140,47 @@
 
 
 				<p class="h4 mb-4 text-center">Sign up</p>
-				<small th:text="${registrationError}" class="form-text text-muted mb-3"></small>
-
 
 				<div class="form-group required">
 				<label class="control-label" for="defaultRegisterFormUserName">User Name</label>
 			
 				<input type="text" id="defaultRegisterFormUserName" class="form-control mb-3 " placeholder="User Name" th:field="*{userName}" autocomplete="off" pattern="[a-zA-Z0-9]{4,20}" required>
-				<small th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="form-text text-muted mb-3"></small>
+				<p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
 				</div>
 
 				<div class="form-group required">
 				<label class="control-label" for="defaultRegisterFormFirstName">First Name</label>
 			
 				<input type="text" id="defaultRegisterFormFirstName" class="form-control mb-3 " placeholder="First name" th:field="*{firstName}" pattern="[a-zA-Z]{3,30}" required>
-				<small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="form-text text-muted mb-3"></small>
+				<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
 				</div>
 
 				<div>
 				<label for="defaultRegisterFormLastName">Last Name</label>
 			
 				<input type="text" id="defaultRegisterFormLastName" class="form-control mb-3" placeholder="Last name" th:field="*{lastName}" pattern="[a-zA-Z]{1,50}">
-				<small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="form-text text-muted mb-3"></small>
+				<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{lastName}"></p>
 				</div>
 
 				<div class="form-group required">
 				<label for="defaultRegisterFormEmail" class="control-label" >Email</label>
 			
 				<input type="email" id="defaultRegisterFormEmail" class="form-control mb-3" placeholder="E-mail" th:field="*{email}" required>
-				<small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="form-text text-muted mb-3"></small>
+				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 				</div>
 
 				<div class="form-group required">
 				<label class="control-label" for="defaultRegisterFormPhoneNumber">Phone Number</label>
 			
-				<input type="text" id="defaultRegisterFormPhoneNumber" class="form-control mb-3" placeholder="Phone number" th:field="*{phoneNumber}" pattern="[0-9\\+]{10,.}" required>
-					<small th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="form-text text-muted mb-3" ></small>
+				<input type="text" id="defaultRegisterFormPhoneNumber" class="form-control mb-3" placeholder="Phone number" th:field="*{phoneNumber}" pattern="[0-9]{10,.}" required>
+				<p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></p>
 				</div>
 
 				<div class="form-group required">
 				<label class="control-label" for="defaultRegisterFormPassword">Password</label>
 			
 				<input type="password" id="defaultRegisterFormPassword" class="form-control " placeholder="Password" th:field="*{password}" pattern=".{8,20}" required>
-				<small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"class="form-text text-muted mb-3" ></small>
+				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 			
 				<small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-3">Minimal 8 characters length</small>
 				</div>

@@ -1,30 +1,33 @@
 .dashboard{
    
   width:100%;
-  height: 100%;
-  
+  height:100%;
+  min-height: 800px;
+  max-height: 10000px;
   float: top;
   position:relative;
+  background: url("/img/test.gif");
+  
 }
 .user-options{
   
-  width:15%;
+  width:10%;
   height: 100%;
   
   float: left;
   position:relative;
-  
-  background: url("/img/pattern2.jpeg");
+  opacity:0.4;
+  background: url("/img/test.gif");
   color: white;
 }
 
 .user{
   
-  width:85%;
+  width:80%;
   height: 100%;
   
   position: relative;
-  margin-left:15%;
+  margin-left:10%;
   
 }
 
@@ -50,7 +53,7 @@
 }
 .posts{
   text-align: center;
-  width:80%;
+  width:100%;
   height: 100%;
   float:left;
   position:relative;
@@ -71,7 +74,7 @@
   position:relative;
 }
 .previouspost{
-  overflow: scroll;
+  
   height: 60%;
   width:70%;
   margin-left: 15%;
@@ -80,7 +83,7 @@
 }
 .post{
   
-  width:80%;
+  width:100%;
   height:15%;
   margin-left: 10%;
   float:top;
@@ -89,20 +92,20 @@
 }
 .connect{
   
-  width:20%;
+  width:0%;
   height: 100%;
 
-  margin-left: 80%;
+  margin-left: 91%;
   position:relative;
-  background: url("/img/test.gif");
+  
 }
 .notify{
-  width:20%;
+  width:10%;
   height: 100%;
 
-  margin-left: 80%;
+  margin-left: 91%;
   position:relative;
-  background: url("/img/test.gif");
+  
 }
 .user-friend{
   

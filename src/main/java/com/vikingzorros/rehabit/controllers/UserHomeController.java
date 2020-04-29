@@ -70,7 +70,7 @@ public class UserHomeController {
         Post post=new Post();
         userPosts=getPostTime(userPosts);
         theModel.addAttribute("post",post);
-        return "addPostpage2";
+        return "addPostPage";
     }
 
     @PostMapping("/addPost")
