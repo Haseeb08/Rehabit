@@ -2,10 +2,10 @@ package com.vikingzorros.rehabit.service;
 
 import com.vikingzorros.rehabit.daorepositories.UserRepository;
 import com.vikingzorros.rehabit.dto.UserDto;
-import com.vikingzorros.rehabit.entities.Post;
 import com.vikingzorros.rehabit.entities.User;
 import com.vikingzorros.rehabit.objectmappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public List<UserDto> findAllUsers() {
@@ -50,6 +53,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(UserDto userDto) {
+
+        String encryptedPassword = passwordEncoder.encode(userDto.getPassword());
+        userDto.setPassword(encryptedPassword);
         User user = userMapper.convertToEntity(userDto);
         userRepository.save(user);
     }
@@ -79,5 +85,15 @@ public class UserServiceImpl implements UserService {
         return userDto;
 
     }
+
+    @Override
+    public UserDto findByPhoneNumber(String phoneNumber) {
+        User user =  userRepository.findByPhoneNumber(phoneNumber);
+        UserDto userDto = null;
+        if(user!=null)
+            userDto = userMapper.convertToDto(user);
+        return userDto;
+    }
+
 
 }

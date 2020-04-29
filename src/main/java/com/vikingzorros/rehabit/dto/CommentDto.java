@@ -1,18 +1,14 @@
 package com.vikingzorros.rehabit.dto;
 
-import com.vikingzorros.rehabit.entities.Post;
-import com.vikingzorros.rehabit.entities.User;
-import lombok.*;
-import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
+import lombok.*;
+
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Component
 public class CommentDto {
 
     private int id;

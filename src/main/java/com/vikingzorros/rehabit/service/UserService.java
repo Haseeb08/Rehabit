@@ -1,7 +1,6 @@
 package com.vikingzorros.rehabit.service;
 
 import com.vikingzorros.rehabit.dto.UserDto;
-import com.vikingzorros.rehabit.entities.Post;
 import com.vikingzorros.rehabit.entities.User;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +15,5 @@ public interface UserService {
     void deleteById(int id);
     UserDto findByEmail(String email);
     UserDto findByUserName(String userName);
+    UserDto findByPhoneNumber(String phoneNumber);
 }

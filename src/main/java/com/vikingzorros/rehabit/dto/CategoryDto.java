@@ -2,7 +2,6 @@ package com.vikingzorros.rehabit.dto;
 
 
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -11,7 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Component
 public class CategoryDto {
 
     private int id;

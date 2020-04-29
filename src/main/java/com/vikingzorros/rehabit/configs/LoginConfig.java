@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 
@@ -51,13 +52,19 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
+    //beans
+    //bcrypt bean definition
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
 
         auth.setUserDetailsService(userDetailsService); //set the custom user details service
-        auth.setPasswordEncoder(NoOpPasswordEncoder.getInstance()); //set the password encoder - bcrypt
+        auth.setPasswordEncoder(passwordEncoder()); //set the password encoder - bcrypt
 
         return auth;
     }

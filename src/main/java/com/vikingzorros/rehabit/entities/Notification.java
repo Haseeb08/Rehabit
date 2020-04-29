@@ -29,7 +29,8 @@ public class Notification {
     private String time;
 
     @ToString.Exclude
-    @ManyToOne( cascade=CascadeType.ALL,
+    @ManyToOne( cascade={CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH},
         fetch = FetchType.LAZY)
     @JoinColumn(name = "track_habit_id")
     private TrackHabit trackHabit;
