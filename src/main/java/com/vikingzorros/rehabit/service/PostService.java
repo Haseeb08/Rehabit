@@ -10,12 +10,13 @@ import java.util.List;
 
 public interface PostService {
 
-    List<PostDto> findAllPosts();
+    List<Post> findAllPosts();
     PostDto findById(int id);
     void save(PostDto post);
     void deleteById(int id);
     List<PostDto> findByCategory(Category category);
 
+    void updateHabitCount(int id,boolean response);
 
     List<PostDto> findAllByUserId(int id);
 

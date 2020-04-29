@@ -6,6 +6,7 @@ import com.vikingzorros.rehabit.dto.*;
 import com.vikingzorros.rehabit.entities.Category;
 import com.vikingzorros.rehabit.entities.Comment;
 import com.vikingzorros.rehabit.entities.Post;
+import com.vikingzorros.rehabit.entities.TrackHabit;
 import com.vikingzorros.rehabit.objectmappers.UserMapper;
 import com.vikingzorros.rehabit.service.*;
 import lombok.extern.slf4j.Slf4j;
@@ -13,12 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.management.StandardEmitterMBean;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @Controller
@@ -40,17 +46,17 @@ public class UserHomeController {
     @Autowired
     TrackHabitService trackHabitService;
 
+    @Autowired
+    MotivationalMessageService motivationalMessageService;
+
     @GetMapping("/dashboard")
     public String getdash(Model model,HttpServletRequest request){
 
-        List<PostDto> allPosts = postService.findAllPosts();
+        List<Post> allPosts = postService.findAllPosts();
        UserDto userDto = (UserDto) request.getSession().getAttribute("user");
+       allPosts = getPostsTime(allPosts);
         model.addAttribute("user",userDto);
         model.addAttribute("allPosts",allPosts);
-//        for(PostDto post: allPosts){
-//            log.info(" In Dashboard user name of post-->"+post.getUser()+"");
-//        }
-
         return "dashboard";
     }
 
@@ -62,7 +68,7 @@ public class UserHomeController {
         List<PostDto> userPosts = postService.findAllByUserId(userDto.getId());
         theModel.addAttribute("userPosts",userPosts);
         Post post=new Post();
-        //List<CategoryDto> allCategories = categoryService.findAllCategories();
+        userPosts=getPostTime(userPosts);
         theModel.addAttribute("post",post);
         return "addPostpage2";
     }
@@ -82,8 +88,7 @@ public class UserHomeController {
         posts.add(thePost);
         theCategory.setPosts(posts);
         thePost.setUser(userDto);
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        thePost.setCreateTime(timestamp+"");
+        thePost.setCreateTime(TimeController.convert(thePost.getCreateTime()));
         postService.save(thePost);
         log.info("Saving the Post : {}",thePost);
 
@@ -94,9 +99,11 @@ public class UserHomeController {
     public String showCommentPage(@RequestParam("postId") int postId, Model theModel){
 
         PostDto post = postService.findById(postId);
-        theModel.addAttribute("post",post);
+        post.setCreateTime(TimeController.convert(post.getCreateTime()));
         List<CommentDto> commentDtoList = commentService.findByPost(post);
+        commentDtoList = getCommentTime(commentDtoList);
         Comment comment = new Comment();
+        theModel.addAttribute("post",post);
         theModel.addAttribute(("comment"),comment);
         theModel.addAttribute("comments",commentDtoList);
         return "Comment";
@@ -121,38 +128,52 @@ public class UserHomeController {
     }
 
     @GetMapping("/profile")
-    public String getProfile(Model model,HttpServletRequest request){
+    public String getProfile(Model model,HttpServletRequest request) throws ParseException {
         UserDto userDto = (UserDto) request.getSession().getAttribute("user");
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = df.parse(userDto.getCreateTime());
+        userDto.setCreateTime( df.format(date));
         model.addAttribute("user",userDto);
         return  "profile";
     }
 
     @GetMapping("/postTracker")
-    public String postTracker(Model model, HttpServletRequest request){
+    public String postTracker(Model model, HttpServletRequest request,@ModelAttribute("motivationMessage") String motivationMessage){
 
         UserDto userDto = (UserDto) request.getSession().getAttribute("user");
         List<PostDto> posts = postService.findAllPostsTracker(userDto.getId());
-        model.addAttribute("posts",posts);
 
+        posts = getPostTime(posts);
+        for(PostDto postDto:posts) {
+            postDto.setTrackHabitList(getTrackhabitTime(postDto.getTrackHabitList()));
+        }
+        model.addAttribute("posts",posts);
+        model.addAttribute("message",motivationMessage);
         TrackHabitDto trackHabit = new TrackHabitDto();
         model.addAttribute("trackHabit",trackHabit);
+
 
         log.info("adding habit tracer {}",trackHabit);
         return "habitTracker";
     }
-
     @PostMapping("/addTrackHabit/{id}")
-    public String postTracker(@PathVariable int id, @ModelAttribute TrackHabitDto trackHabit,
-                              HttpServletRequest request, Model model){
+    public String postTracker(@PathVariable int id, @ModelAttribute TrackHabitDto trackHabit, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes){
 
         log.info("updating response of habit-->{}",id);
         PostDto post = postService.findById(id);
 
+
         String  response=request.getParameter("response");
         trackHabit.setResponse(response);
 
-        if(request.equals("YES"))
-            post.setHabitCount(post.getHabitCount()+1);
+        if(response.equals("YES")) {
+            postService.updateHabitCount(id,true);
+            Random random = new Random();
+            int messageId = random.nextInt(30)+1;
+            MotivationalMessageDto motivationalMessage = motivationalMessageService.findById(messageId);
+            redirectAttributes.addAttribute("motivationMessage",motivationalMessage.getMessage());
+        }
 
         log.info("setting response of post {} to {}",id,response);
 
@@ -166,5 +187,45 @@ public class UserHomeController {
             trackHabitService.save(trackHabit1);
 
         return "redirect:/Rehabit/postTracker";
+    }
+
+
+    private List<Post> getPostsTime(List<Post> posts){
+
+        for(Post post: posts){
+            log.info(" In Dashboard user name of post-->"+post.getUser().getUserName()+"");
+            String time1 = TimeController.convert(post.getCreateTime());
+            post.setCreateTime(time1);
+        }
+    return posts;
+    }
+
+    private List<PostDto> getPostTime(List<PostDto> postDtos) {
+
+        for (PostDto post : postDtos) {
+            log.info(" In Dashboard user name of post-->" + post.getUser().getUserName() + "");
+            String time1 = TimeController.convert(post.getCreateTime());
+            post.setCreateTime(time1);
+        }
+        return postDtos;
+    }
+    private List<CommentDto> getCommentTime(List<CommentDto> commentDtos){
+
+        for(CommentDto commentDto: commentDtos){
+            log.info(" In Dashboard user name of post-->"+commentDto.getUser().getUserName()+"");
+            String time1 = TimeController.convert(commentDto.getCreateTime());
+            commentDto.setCreateTime(time1);
+        }
+        return commentDtos;
+    }
+
+    private List<TrackHabitDto> getTrackhabitTime(List<TrackHabitDto> trackHabitDtos){
+
+        for(TrackHabitDto trackHabitDto: trackHabitDtos){
+
+            String time1 = TimeController.convert(trackHabitDto.getNotifyTime());
+            trackHabitDto.setNotifyTime(time1);
+        }
+        return trackHabitDtos;
     }
 }

@@ -131,7 +131,7 @@ height: 10px;
     height: 400px;
     margin-left: 14%;
     margin-right: 20%;
-    border-radius: 30px;
+    border-radius: 250px;
     border: 1px Solid black;
 }
 
@@ -227,7 +227,7 @@ h4, .h4 {
                     </tr>
                     <tr>
                         <td class="heading">Number of habits</td>
-                        <td class="detail"><span th:text="${user.posts.size()}"></span></td>
+                        <td class="detail"><span th:text="${session.user.posts.size()}"></span></td>
                     </tr>
 
 

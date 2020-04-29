@@ -26,28 +26,9 @@ public class PostServiceImpl implements PostService {
 
     @Override
     @Transactional
-    public List<PostDto> findAllPosts() {
+    public List<Post> findAllPosts() {
         List<Post> posts = postRepository.findAll();
-
-
-//        List<Post> openPosts = new ArrayList<>();
-//        for(Post post: posts){
-//            if(post.getIsAnonymous()==0) {
-//                openPosts.add(post);
-//                log.info("user name of post-->"+post.getUser().getUserName()+"");
-//            }
-//        }
-        List<PostDto> postDtoList = new ArrayList<>();
-        for(Post post: posts){
-                log.info("user name of post-->"+post.getUser().getUserName()+"");
-                postDtoList.add(postMapper.convertToDto(post));
-        }
-//        List<PostDto> postDtoList = postMapper.convertToDtos(posts);
-
-        for(PostDto post: postDtoList){
-            log.info("user name of postDto-->"+post.getUser()+"");
-        }
-        return postDtoList;
+        return posts;
     }
 
     @Override
@@ -104,14 +85,16 @@ public class PostServiceImpl implements PostService {
         List<PostDto> postDtoList = postMapper.convertToDtos(posts);
         return postDtoList;
     }
-//
-//    @Override
-//    public void savePostTrackHabit(int id, TrackHabit trackHabit) {
-//
-//        Optional<Post> post = postRepository.findById(id);
-//        //TrackHabit trackHabit = new TrackHabit();
-//        //trackHabit.setResponse(Integer.parseInt(response));
-//        post.ifPresent(value -> value.getTrackHabitList().add(trackHabit));
-//
-//    }
+
+
+    @Override
+    @Transactional
+    public void updateHabitCount(int id, boolean flag) {
+        Optional<Post> post = postRepository.findById(id);
+        if (post.isPresent()) {
+            Post post1 = post.get();
+            if (flag)
+                post1.setHabitCount(post1.getHabitCount() + 1);
+        }
+    }
 }

@@ -31,4 +31,6 @@ public class PostDto {
     private List<TrackHabitDto> trackHabitList;
 
     private CategoryDto category;
+
+
 }

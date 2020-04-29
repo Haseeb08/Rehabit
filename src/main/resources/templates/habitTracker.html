@@ -7,12 +7,6 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <!--    <link rel="stylesheet"-->
-    <!--          href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"-->
-    <!--          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"-->
-    <!--          crossorigin="anonymous">-->
-
 
     <meta charset="UTF-8">
     <title> ReHabit - Change your habits!</title>
@@ -163,8 +157,9 @@ h3 {
 
         <section class="bg-light">
             <h3>Post Habit Tracker</h3>
+           <h3> <span th:if="${message != null}"  th:text="Today's motivation : ${message}"></span></h3>
             <main>
-                <span th:if="${message != null}" th:text="${message}"></span>
+
 
                 <div class="eachPost mb-2 ml-10 text-black rounded" th:each = "post : ${posts}" >
 
@@ -175,9 +170,9 @@ h3 {
                     </p>
                     <div class="postD"></div>
                     <p class="post-description p-3 ">
-<!--						<span>-->
-<!--							Number of times repeated - <small class="mb-3" th:text="${post.habitCount}"> </small>-->
-<!--						</span>-->
+						<span>
+							Number of times repeated - <small class="mb-3" th:text="${post.habitCount}"> </small>
+						</span>
                     </p>
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -194,7 +189,6 @@ h3 {
                         </tr>
                         <tr>
                             <form th:action="@{|/Rehabit/addTrackHabit/${post.id}|}" th:method="POST">
-                                <!--								<input type="text" th:field="${trackHabit.response}" />-->
                                 <th:block th:object="${trackHabit}">
                                     <label >select today's status</label>
 
