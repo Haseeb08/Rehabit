@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title> ReHabit - Change your habits!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+
+
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="/css/owl.carousel.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="/css/animate.css">
+
+
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/newpage.css">
+
+    <style>
+        .eachPost {
+            border: 2px solid black;
+            margin-top: 15px;
+            box-shadow: 2px;
+            border-radius: 2px;
+            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
+            width: 780px;
+            height: 600px;
+            margin-left: 200px;
+        }
+
+        .addButton {
+            margin-left: 300px;
+        }
+
+        .text-muted {
+            color: #6c757d !important;
+            text-align: left;
+            margin-right: 40%;
+            margin-left: 12%;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="menu">
+    <a href="/ReHabit/dashboard">
+        <h1 style="color:white;">ReHabit</h1>
+    </a>
+</div>
+<div class="main">
+    <div class="profile">
+        <div class="post-meta">
+
+            <div class="prof-pic">
+                <a href=""><img src="/img/profile.png" class="pimg" /></a>
+
+            </div>
+            <div class="user-name">
+                <a href=""> <b>
+                    <p th:text="${session.user.userName}"> </p>
+                </b></a>
+            </div>
+        </div>
+        <div class="options" >
+            <br>
+
+            <a href="/Rehabit/profile"><b>  My Profile</b></a><br>
+            <hr>
+            <a href="/Rehabit/dashboard"><b>  Home</b></a><br>
+            <hr>
+            <a href="/Rehabit/addPostPage"><b>  Add New Habit</b></a><br>
+            <hr>
+            <a href="/Rehabit/postTracker"><b>  Track My Habit</b></a><br>
+            <hr>
+
+            <a href="/logout"><b>  Signout</b></a><br>
+            <hr>
+        </div>
+
+    </div>
+    <div class="content">
+        <div class="posts">
+            <div class="addform">
+                <div class="addPostFormBox">
+
+                    <div class="addpost">
+                        <div class="addPostFormBox">
+
+                            <form th:action="@{/Rehabit/addPost}" th:object="${post}" method="POST">
+                                <p class="h4 mb-4 text-center">Add habit</p>
+                                <div>
+                                    <label class="control-label" for="defaultRegisterFormUserName">Habit
+                                        Title</label>
+
+                                    <input type="text" id="defaultRegisterFormUserName" class="form-control mb-3 "
+                                           placeholder="title" th:field="*{title}" autocomplete="off" required>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="control-label"
+                                           for="defaultRegisterFormFirstName">Description</label>
+                                    <textarea id="defaultRegisterFormFirstName" class="form-control mb-3 "
+                                              placeholder="Text" th:field="*{description}"></textarea>
+
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="control-label" for="defaultRegisterFormFirstName">Category</label>
+
+                                    <th:block th:object="${category}">
+                                        <label>select category</label>
+
+                                        <select name="categoryName">
+                                            <option value="PUBG">pubg</option>
+                                            <option value="Tv Addict">Tv</option>
+                                            <option value="Smoking">smoking</option>
+
+                                        </select>
+                                    </th:block>
+                                    <br>
+                                </div>
+                                <button class="btn addButton btn-info my-4 " type="submit">Add Habit</button>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+            <div class="post" th:each="post : ${userPosts}">
+                <div class="post-meta">
+
+                    <div class="prof-pic">
+                        <a href=""><img src="/img/profile.png" class="pimg" /></a>
+
+                    </div>
+                    <div class="user-name pr-2">
+                        <a href=""> <b><p th:text="${session.user.userName}+${'  ▶'}"></p></b></a>
+
+                    </div>
+                    <div class="post-title">
+                        <a th:href="@{/Rehabit/commentPage(postId=${post.id})}"> <b>
+                            <p th:text="${post.title}"></p>
+                        </b></a>
+                    </div>
+                </div>
+                <div class="post-desc">
+                    <p th:text="${post.description}"> </p>
+                </div>
+                <div class="post-comment">
+                    <p class="text timeBar mb-3" th:text="${post.createTime}"></p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- main page wrapper -->
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/owl.carousel.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+
+</html>

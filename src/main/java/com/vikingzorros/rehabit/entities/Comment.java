@@ -28,13 +28,13 @@ public class Comment {
     private boolean status;
 
     @ToString.Exclude
-    @ManyToOne(cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE} ,fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
     @ToString.Exclude
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "posts_id")
     private Post post;
 
 }

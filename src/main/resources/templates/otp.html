@@ -29,8 +29,8 @@
 	<link rel="stylesheet" href="/css/owl.theme.default.min.css">
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="/css/animate.css">
-	<!-- Font Awesome -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	
+	
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="/css/style.css">
@@ -79,9 +79,9 @@
 			<form class="border border-light p-5" action="processOtp" method="POST">
 
 				<p class="h4 mb-4 text-center">SMS OTP Verification</p>
-				<p>Dear firstName lastName, please verify account.</p>
+				<p>Please verify account.</p>
 				<label for="defaultLoginFormEmail">Enter OTP</label>
-				<input name="otpValue" type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Enter OTP" Autocomplete="off">
+				<input name="otpValue" type="password" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Enter OTP" Autocomplete="off">
 		
 			<p	style="color: red;" th:text=${message}> </p>
 			
@@ -201,6 +201,6 @@
 	<script src="/js/owl.carousel.js"></script>
 	<script src="/js/wow.min.js"></script>
 	<script src="/js/main.js"></script>
-	<script src="/js/local.js"></script>
+	<script src="/js/local.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title> ReHabit - Change your habits!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+
+
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="/css/owl.carousel.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="/css/animate.css">
+    
+    
+
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/newpage.css">
+
+
+    <style>
+
+
+.post-title {
+	text-align: center;
+	font-weight: bold;
+	display: block ruby;
+	width: -moz-available;
+}
+
+.post-description {
+	color: black;
+	height: auto;
+}
+
+main {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto;
+	grid-row-gap: 40px;
+	justify-items: center;
+	justify-content: center;
+	align-items: stretch;
+	align-content: center;
+	grid-auto-rows: auto;
+	grid-auto-flow: row;
+	margin-right: 200px;
+	height: auto;
+    grip-col-gap: 80px;
+
+}
+
+ul {
+	display: grid;
+	width: 500px;
+}
+
+.eachPost {
+	border: 2px solid rgb(46, 65, 238);
+	margin-top: 15px;
+	box-shadow: 2px;
+	border-radius: 2px;
+	box-shadow: 0 1px 1px 0 rgba(91, 94, 89, 0.575);
+	width: 300px;
+	height:600px
+	margin-left: 400px;
+}
+
+.postD {
+    overflow: auto;
+}
+
+.eachpost {
+    overflow: scroll;
+}
+
+h3 {
+	font-style: helvatic;
+	padding-left: 5px;
+	padding-top: 20px;
+}
+    </style>
+
+</head>
+
+<body>
+    <div class="menu">
+        <a href="/ReHabit/dashboard"><h1 style="color:white;">ReHabit</h1></a>
+    </div>
+    <div class="main">
+        <div class="profile">
+            <div class="post-meta">
+                        
+                <div class="prof-pic">
+                    <a href=""><img src="/img/profile.png" class="pimg"/></a>
+
+                </div>
+                <div class="user-name">
+                    <a href=""> <b><p th:text="${session.user.userName}"> </p></b></a>
+                </div> 
+            </div>
+            <div class="options" >
+                <br>
+            <a href="/Rehabit/profile"><b>  My Profile</b></a><br>
+            <hr>
+            <a href="/Rehabit/dashboard"><b>  Home</b></a><br>
+            <hr>
+            <a href="/Rehabit/addPostPage"><b>  Add New Habit</b></a><br>
+            <hr>
+            <a href="/Rehabit/postTracker"><b>  Track My Habit</b></a><br>
+            <hr>
+
+            <a href="/logout"><b>  Signout</b></a><br>
+
+            <hr>
+            </div>
+
+        </div>
+        <div class="content">
+            <div class="posts">
+
+
+                <h3>Post Habit Tracker</h3>
+                <h3> <span th:if="${message != null}"  th:text="${message}"></span></h3>
+                <main>
+
+
+                    <div class="eachPost mb-2 ml-10 text-black rounded" th:each = "post : ${posts}" >
+
+                        <p class="post-title p-3 bg-dark text-white ">
+                            <span th:text="${post.user.userName}"></span>
+                            <span th:text="${post.title}"></span>
+                           <br> <span class="text-muted mb-3" th:text="${post.createTime}"></span>
+                        </p>
+                        <div class="postD"></div>
+                        <p class="post-description p-3 ">
+                          <br>
+						<p>
+							Number of times repeated - <small class="mb-3" th:text="${post.habitCount}"> </small>
+                    </p>
+                        </p>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>notify time</th>
+                                <th>response</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr th:each="trackHabit : ${post.trackHabitList}">
+                                <td th:text="${trackHabit.notifyTime}"></td>
+                                <td th:text="${trackHabit.response}"></td>
+                            </tr>
+                            <tr>
+                                <form th:action="@{|/Rehabit/addTrackHabit/${post.id}|}" th:method="POST">
+                                    <th:block th:object="${trackHabit}">
+                                        <label >select today's status</label>
+
+                                        <select name="response">
+                                            <option value="YES" >YES</option>
+                                            <option value="NO" >NO</option>
+                                        </select>
+                                    </th:block>
+                                    <input class="myButton" type="submit" value="Submit Respone"/>
+                                </form>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </main>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+ <!-- main page wrapper -->
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/owl.carousel.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+
+</html>

@@ -15,6 +15,5 @@ public interface UserService {
     void deleteById(int id);
     UserDto findByEmail(String email);
     UserDto findByUserName(String userName);
-
-
+    UserDto findByPhoneNumber(String phoneNumber);
 }

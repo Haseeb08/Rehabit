@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 
@@ -38,26 +39,38 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
 
         http    .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/Rehabit/").permitAll()
+                .antMatchers("/Rehabit/",
+                        "/Rehabit/login","/Rehabit/signup",
+                        "/Rehabit/otp","/Rehabit/saveUser",
+                        "/Rehabit/processOtp","/Rehabit/resendOtp").permitAll()
+                .antMatchers("/Rehabit/**").authenticated()
                 .and()
                 .formLogin()
                 .successHandler(handler)
-                    .loginPage("/Rehabit/login")
-                    .loginProcessingUrl("/authenticateTheUser")
-                    .permitAll()
+                .loginPage("/Rehabit/login")
+                .loginProcessingUrl("/authenticateTheUser")
+                .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/Rehabit/dashboard")
+                .logoutSuccessUrl("/Rehabit/")
                 .permitAll();
+
+        http.headers().frameOptions().disable();
     }
 
+    //beans
+    //bcrypt bean definition
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
 
         auth.setUserDetailsService(userDetailsService); //set the custom user details service
-        auth.setPasswordEncoder(NoOpPasswordEncoder.getInstance()); //set the password encoder - bcrypt
+        auth.setPasswordEncoder(passwordEncoder()); //set the password encoder - bcrypt
 
         return auth;
     }

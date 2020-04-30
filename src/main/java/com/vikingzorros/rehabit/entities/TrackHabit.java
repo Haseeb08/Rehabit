@@ -4,6 +4,7 @@ package com.vikingzorros.rehabit.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,15 +27,15 @@ public class TrackHabit {
     private String response;
 
     @ToString.Exclude
-    @OneToOne(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "track_habit_id")
-    private Notification notification;
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+    mappedBy = "trackHabit")
+    private List<Notification> notificationList ;
 
     @ToString.Exclude
-    @ManyToOne(cascade = CascadeType.ALL,
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.REFRESH},
             fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "posts_id")
     private Post post;
 
 }

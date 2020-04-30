@@ -115,7 +115,7 @@ margin-left: 10%;
 
 
 #fh5co-hero-wrapper {
-  height: 800px;
+  height: 900px;
   width: 100%;
   background: url("../img/banner-bg.jpg") no-repeat center;
   border-radius: 0 0 50% 50% / 4%;
@@ -154,7 +154,7 @@ margin-left: 10%;
 .main-navbar-nav .nav-link {
   opacity: 1 !important;
   margin: 0 35px;
-  font-size: 14.5px;
+  font-size: 18px;
   font-weight: 500;
 }
 
@@ -184,7 +184,7 @@ margin-left: 10%;
 }
 .fh5co-hero-inner > p {
   width: 400px;
-  font-size: 14px;
+  font-size: 18px;
   color: #fff;
   margin-top: 30px;
   margin-bottom: 30px;
@@ -327,6 +327,7 @@ margin-left: 10%;
   width: 100%;
   height: auto;
   margin-top: -180px;
+  float: left;
 }
 .fh5co-features-outer .col-sm-6 {
   margin-top: 80px;
