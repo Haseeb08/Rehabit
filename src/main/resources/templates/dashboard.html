@@ -25,7 +25,16 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/newpage.css">
 
-    
+
+    <style>
+        .text-muted {
+    color: #6c757d !important;
+    text-align: left;
+    margin-right: 40%;
+    margin-left: 12%;
+}
+    </style>
+
 </head>
 
 <body>
@@ -54,7 +63,9 @@
             <hr>
             <a href="/Rehabit/postTracker">Track My Habit</a><br>
             <hr>
-            <a href="/Rehabit/signout">Signout</a><br>
+
+            <a href="/logout">Signout</a><br>
+
             <hr>
             </div>
 
@@ -66,21 +77,27 @@
                 <div class="post" th:each = "post : ${allPosts}">
                     <div class="post-meta">
                         
-                        <div class="prof-pic">
+
+                        <div class="prof-pic pr-1 pl-1">
                             <a href=""><img src="/img/profile.png" class="pimg"/></a>
 
                         </div>
-                        <div class="user-name">
+                        <div class="user-name pr-2">
                             <a href=""> <b><p th:text="${post.user.userName}+${'  ▶'}"></p></b></a>
+
                         </div> 
-                        <div class="post-title">
-                            <a th:href="@{/Rehabit/commentPage(postId=${post.id})}"> <b><p th:text="${post.title}">Dont play pubg</p></b></a>
+                        <div class="post-title pl-1">
+                            <a th:href="@{/Rehabit/commentPage(postId=${post.id})}"> <b><p th:text="${post.title}"></p></b></a>
                         </div>
+
+
                     </div>
                     <div class="post-desc">
                        <p th:text="${post.description}"> </p>
                     </div>
                     <div class="post-comment">
+
+                        <p class="text-muted timeBar mb-3" th:text="${post.createTime}"></p>
 
                     </div>
                     

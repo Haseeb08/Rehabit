@@ -25,7 +25,114 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/newpage.css">
 
-    
+
+    <style>
+
+img {
+
+    vertical-align: middle;
+    border-style: none;
+    margin-left: 35%;
+    border-radius: 250px;
+
+}
+.head {
+	positon: fixed;
+	height: 50px;
+}
+
+
+h3 {
+	font-style: helvatic;
+	padding-left: 5px;
+	padding-top: 20px;
+}
+
+.user-details {
+    width: 100%;
+    float:none;
+    text-align: center;
+}
+
+.user-details ul {
+    text-align: center;
+}
+.user-menu {
+    text-align: center;
+    padding-right: 220px;
+}
+
+
+ul {
+  list-style-type:none;
+
+}
+
+
+.table {
+
+width: 40%;
+max-width: 100%;
+margin-bottom: 1rem;
+background-color: transparent;
+margin-right: 20%;
+margin-left: 30%;
+margin-top: 10px;
+font-size: unset;
+
+.heading {
+font-size: unset;
+font-weight: bold;
+}
+
+.detail {
+text-align: center;
+}
+.profile-pic {
+width: 400px;
+height: 400px;
+backgroung-color: red;
+margin-left: 35%;
+margin-right: 35%;
+}
+
+.white-bg {
+width: 100%;
+height: 10px;
+}
+
+.profile-pic img {
+    vertical-align: middle;
+    border-style: none;
+    object-fit: cover;
+    width: 400px;
+    height: 400px;
+    margin-left: 14%;
+    margin-right: 20%;
+    border-radius: 250px;
+    border: 1px Solid black;
+}
+
+h4, .h4 {
+
+    font-size: 1.5rem;
+    text-align: center;
+    padding-right: 50px;
+    margin-top: 1%;
+    margin-bottom: 1.5%;
+    font-style: oblique;
+    font-size: xx-large;
+    font-weight: unset;
+   }
+h4, .h4 {
+
+    font-size: 1.5rem;
+    margin-left: 840px;
+    margin-top: 20px;
+
+}
+</style>
+
 </head>
 
 <body>
@@ -54,45 +161,67 @@
             <hr>
             <a href="/Rehabit/postTracker">Track My Habit</a><br>
             <hr>
-            <a href="/Rehabit/signout">Signout</a><br>
+
+            <a href="/logout">Signout</a><br>
+
             <hr>
             </div>
 
         </div>
-        <div class="content">
-            <div class="posts">
-                <div class="addform">
-                    <div class="user-details">
-                        <h2>My Profile</h2>
-                        <ul>
-                            <li>Name: <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span></li>
-                            <li>User Name:<span id="userName" th:text="${user.userName}"></span></li>
-                            <li>Email: <span th:text="${user.email}"></span> </li>
-                            <li>Phone Number: <span th:text="${user.phoneNumber}"></span></li>
-                        </ul>
-                    </div>
-                     
-                    
 
-                </div>
-                
-
-                
-
-                
-            </div>
-
+<!--        <div class="white-bg">-->
+<!--            <img src="../img/whitebg.png" alt="white Picture">-->
+<!--        </div>-->
+        <div class="profile-pic">
+            <img src="../img/userprofile2.png" alt="Profile Picture">
         </div>
-    </div>
+
+        <h4 th:text="${user.userName}"></h4>
+        <div class="user-details-table">
+
+            <table class="table table-striped">
+
+                <tbody>
+                <tr>
+                    <td class="heading">First Name</td>
+                    <td class="detail"><span th:text="${user.firstName}"></span></td>
+                </tr>
+                <tr>
+                    <td class="heading">Last Name</td>
+                    <td class="detail"><span th:text="${user.lastName}"></span></td>
+                </tr>
+                <tr>
+                    <td class="heading">E-mail</td>
+                    <td class="detail"><span th:text="${user.email}"></span></td>
+                </tr>
+                <tr>
+                    <td class="heading">Phone</td>
+                    <td class="detail"><span th:text="${user.phoneNumber}"></span></td>
+                </tr>
+                <tr>
+                    <td class="heading">Created on</td>
+                    <td class="detail"><span th:text="${user.createTime}"></span></td>
+                </tr>
+                <tr>
+                    <td class="heading">Number of habits</td>
+                    <td class="detail"><span th:text="${session.user.posts.size()}"></span></td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+</div>
 
 
 
 
 
 
-	
 
- <!-- main page wrapper -->
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.js"></script>

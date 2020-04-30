@@ -25,6 +25,14 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/newpage.css">
 
+    <style>
+
+        .PostComment {
+
+        margin-bottom: 100px;
+        }
+    </style>
+
     
 </head>
 
@@ -54,14 +62,17 @@
             <hr>
             <a href="/Rehabit/postTracker">Track My Habit</a><br>
             <hr>
-            <a href="/Rehabit/signout">Signout</a><br>
+            <a href="/logout">Signout</a><br>
+
             <hr>
             </div>
 
         </div>
         <div class="content">
             <div class="posts">
-                <div class="addform">
+
+                <div class="PostComment">
+
                     <div class="post">
                         <div class="post-meta">
                     
@@ -69,72 +80,71 @@
                                 <a href=""><img src="/img/profile.png" class="pimg" /></a>
                     
                             </div>
-                            <div class="user-name">
-                                <a href=""> <b>
-                                        <p th:text="${post.user.userName}+${'  ▶'}"></p>
-                                    </b></a>
-                            </div>
+
+<!--                            <div class="user-name">-->
+<!--                                <a href=""> <b>-->
+<!--                                        <p th:text="${post.user.userName}+${'  ▶'}"></p>-->
+<!--                                    </b></a>-->
+<!--                            </div>-->
                             <div class="post-title">
                                 <a th:href="@{/Rehabit/commentPage(postId=${post.id})}"> <b>
-                                        <p th:text="${post.title}">Dont play pubg</p>
+                                        <p th:text="${post.title}"></p>
                                     </b></a>
                             </div>
                         </div>
+                        <p class="text-muted timeBar mb-3" th:text="${post.createTime}"></p>
                         <div class="post-desc">
                             <p th:text="${post.description}"> </p>
                         </div>
+
                         <div class="post-comment">
                             <div class="comment-form">
                                 <form th:action="@{/Rehabit/addComment(postId=${post.id})}" method="post">
-                        
-                        
+
+
                                     <textarea th:field="${comment.message}"  rows="3" cols="45"> </textarea>
                                     <br>
                                     <button class="myButton" type="submit">Add Comment</button>
-                        
+
                                 </form>
                             </div>
-        
-                    
-                        </div>
-                    
-                    </div>   
-                    
 
-                </div>
-                
+
+                        </div>
+                    </div>
+                        </div>
 
                 <div class="post" th:each = "comment : ${comments}">
-                    <div class="post-meta">
-                        
-                        <div class="prof-pic">
-                            <a href=""><img src="/img/profile.png" class="pimg"/></a>
+                <div class="post-meta">
 
-                        </div>
-                        <div class="user-name">
-                            <a href=""> <b><p th:text="${comment.user.userName}"></p></b></a>
-                        </div> 
-                       
+                    <div class="prof-pic">
+                        <a href=""><img src="/img/profile.png" class="pimg"/></a>
+
                     </div>
-                    <div class="post-desc">
-                       <p th:text="${comment.message}"> </p>
+                    <div class="user-name">
+                        <a href=""> <b><p th:text="${comment.user.userName}"></p></b></a>
                     </div>
-                    
-                    
+
                 </div>
+                <div class="post-desc">
+                    <p th:text="${comment.message}"> </p>
+                </div>
+                    <div class="post-comment">
+                        <p class="text timeBar mb-3" th:text="${comment.createTime}"></p>
+                    </div>
+
+            </div>
+
+        </div>
+                
+
 
                 
             </div>
 
         </div>
-    </div>
 
 
-
-
-
-
-	
 
  <!-- main page wrapper -->
 

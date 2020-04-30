@@ -1,17 +1,23 @@
 package com.vikingzorros.rehabit.entities;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
+@ToString
+
 @Entity
 @Table(name="user")
 public class User {
@@ -21,47 +27,47 @@ public class User {
     @Column(name="id")
     private int id;
 
-    @NotNull(message = "is required")
+    @Column(name="first_name")
+    private String firstName;
+
+    @Column(name="last_name")
+    private String lastName;
+
     @Column(name="user_name")
     private String userName;
 
-    @NotNull(message = "is required")
-    @Column(name="firstName")
-    private String firstName;
-
-    @NotNull(message = "is required")
-    @Column(name="lastName")
-    private String lastName;
-
-    @NotNull(message = "is required")
     @Column(name="email")
     private String email;
 
-    @NotNull(message = "is required")
+    @ToString.Exclude
     @Column(name="password")
     private String password;
 
-    @NotNull(message = "is required")
     @Column(name="phone_number")
     private String phoneNumber;
-
 
     @Column(name="create_time")
     private String createTime;
 
-    /* @OneToMany(cascade=CascadeType.ALL ,
-            fetch = FetchType.LAZY,
-            mappedBy = "user")
-    private List<Post> posts;
-
+    @ToString.Exclude
     @OneToMany(cascade=CascadeType.ALL ,
             fetch = FetchType.LAZY,
             mappedBy = "user")
+    @JsonIgnore
+    private List<Post> posts;
+
+    @ToString.Exclude
+    @OneToMany(cascade=CascadeType.ALL ,
+            fetch = FetchType.LAZY,
+            mappedBy = "user")
+    @JsonIgnore
     private List<Comment> comments;
 
+    @ToString.Exclude
     @OneToMany(cascade=CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "user")
-    private List<BlockUser> blockUserList; */
+    @JsonIgnore
+   private List<BlockUser> blockUserList;
 
 }
