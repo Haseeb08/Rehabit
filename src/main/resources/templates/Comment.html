@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title> ReHabit - Change your habits!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+
+
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="/css/owl.carousel.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="/css/animate.css">
+    
+    
+
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/newpage.css">
+
+    <style>
+
+        .PostComment {
+
+        margin-bottom: 100px;
+        }
+    </style>
+
+    
+</head>
+
+<body>
+    <div class="menu">
+        <a href="/ReHabit/dashboard"><h1 style="color:white;">ReHabit</h1></a>
+    </div>
+    <div class="main">
+        <div class="profile">
+            <div class="post-meta">
+                        
+                <div class="prof-pic">
+                    <a href=""><img src="/img/profile.png" class="pimg"/></a>
+
+                </div>
+                <div class="user-name">
+                    <a href=""> <b><p th:text="${session.user.userName}"> </p></b></a>
+                </div> 
+            </div>
+            <div class="options" >
+                <br>
+            <a href="/Rehabit/profile">My Profile</a><br>
+            <hr>
+            <a href="/Rehabit/dashboard">Home</a><br>
+            <hr>
+            <a href="/Rehabit/addPostPage">Add New Habit</a><br>
+            <hr>
+            <a href="/Rehabit/postTracker">Track My Habit</a><br>
+            <hr>
+            <a href="/logout">Signout</a><br>
+
+            <hr>
+            </div>
+
+        </div>
+        <div class="content">
+            <div class="posts">
+
+                <div class="PostComment">
+
+                    <div class="post">
+                        <div class="post-meta">
+                    
+                            <div class="prof-pic">
+                                <a href=""><img src="/img/profile.png" class="pimg" /></a>
+                    
+                            </div>
+
+<!--                            <div class="user-name">-->
+<!--                                <a href=""> <b>-->
+<!--                                        <p th:text="${post.user.userName}+${'  ▶'}"></p>-->
+<!--                                    </b></a>-->
+<!--                            </div>-->
+                            <div class="post-title">
+                                <a th:href="@{/Rehabit/commentPage(postId=${post.id})}"> <b>
+                                        <p th:text="${post.title}"></p>
+                                    </b></a>
+                            </div>
+                        </div>
+                        <p class="text-muted timeBar mb-3" th:text="${post.createTime}"></p>
+                        <div class="post-desc">
+                            <p th:text="${post.description}"> </p>
+                        </div>
+
+                        <div class="post-comment">
+                            <div class="comment-form">
+                                <form th:action="@{/Rehabit/addComment(postId=${post.id})}" method="post">
+
+
+                                    <textarea th:field="${comment.message}"  rows="3" cols="45"> </textarea>
+                                    <br>
+                                    <button class="myButton" type="submit">Add Comment</button>
+
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
+                        </div>
+
+                <div class="post" th:each = "comment : ${comments}">
+                <div class="post-meta">
+
+                    <div class="prof-pic">
+                        <a href=""><img src="/img/profile.png" class="pimg"/></a>
+
+                    </div>
+                    <div class="user-name">
+                        <a href=""> <b><p th:text="${comment.user.userName}"></p></b></a>
+                    </div>
+
+                </div>
+                <div class="post-desc">
+                    <p th:text="${comment.message}"> </p>
+                </div>
+                    <div class="post-comment">
+                        <p class="text timeBar mb-3" th:text="${comment.createTime}"></p>
+                    </div>
+
+            </div>
+
+        </div>
+                
+
+
+                
+            </div>
+
+        </div>
+
+
+
+ <!-- main page wrapper -->
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/owl.carousel.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+
+</html>
