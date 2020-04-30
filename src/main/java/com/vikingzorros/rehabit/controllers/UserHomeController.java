@@ -170,8 +170,8 @@ public class UserHomeController {
 
         if(response.equals("YES")) {
             postService.updateHabitCount(id,true);
-            Random random = new Random();
-            int messageId = random.nextInt(30)+1;
+            //Random random = new Random();
+            int messageId = 1;
             MotivationalMessageDto motivationalMessage = motivationalMessageService.findById(messageId);
             redirectAttributes.addAttribute("motivationMessage",motivationalMessage.getMessage());
         }
