@@ -1,17 +1,23 @@
 package com.vikingzorros.rehabit.entities;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
+
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 @ToString
+
 @Entity
 @Table(name="user")
 public class User {
