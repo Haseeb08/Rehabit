@@ -88,7 +88,8 @@ public class UserHomeController {
         posts.add(thePost);
         theCategory.setPosts(posts);
         thePost.setUser(userDto);
-        thePost.setCreateTime(TimeController.convert(thePost.getCreateTime()));
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        thePost.setCreateTime(TimeController.convert(timestamp.toString()));
         postService.save(thePost);
         log.info("Saving the Post : {}",thePost);
 
