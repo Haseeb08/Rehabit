@@ -76,5 +76,6 @@ Or
 ./mvnw spring-boot:run (if maven is not installed on machine).
  
 - Run the script.sql file in h2-Console.
+  Navigate to http://localhost:8080/h2-console ,connect to database and run the script file.
 - Navigate to http://localhost:8080/Rehabit
 - Post the habits, do the comments, track your habits and have fun.
