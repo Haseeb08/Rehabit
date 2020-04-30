@@ -64,11 +64,11 @@ ul {
 }
 
 .eachPost {
-	border: 2px solid black;
+	border: 2px solid rgb(46, 65, 238);
 	margin-top: 15px;
 	box-shadow: 2px;
 	border-radius: 2px;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
+	box-shadow: 0 1px 1px 0 rgba(91, 94, 89, 0.575);
 	width: 300px;
 	height:600px
 	margin-left: 400px;
@@ -107,18 +107,18 @@ h3 {
                     <a href=""> <b><p th:text="${session.user.userName}"> </p></b></a>
                 </div> 
             </div>
-            <div class="options" style="text-align: center;font-size: 20px;">
+            <div class="options" >
                 <br>
-            <a href="/Rehabit/profile">My Profile</a><br>
+            <a href="/Rehabit/profile"><b>  My Profile</b></a><br>
             <hr>
-            <a href="/Rehabit/dashboard">Home</a><br>
+            <a href="/Rehabit/dashboard"><b>  Home</b></a><br>
             <hr>
-            <a href="/Rehabit/addPostPage">Add New Habit</a><br>
+            <a href="/Rehabit/addPostPage"><b>  Add New Habit</b></a><br>
             <hr>
-            <a href="/Rehabit/postTracker">Track My Habit</a><br>
+            <a href="/Rehabit/postTracker"><b>  Track My Habit</b></a><br>
             <hr>
 
-            <a href="/logout">Signout</a><br>
+            <a href="/logout"><b>  Signout</b></a><br>
 
             <hr>
             </div>
@@ -170,7 +170,7 @@ h3 {
                                             <option value="NO" >NO</option>
                                         </select>
                                     </th:block>
-                                    <input type="submit" value="Submit Respone"/>
+                                    <input class="myButton" type="submit" value="Submit Respone"/>
                                 </form>
 
                             </tr>

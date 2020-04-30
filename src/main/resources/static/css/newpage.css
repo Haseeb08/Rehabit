@@ -13,7 +13,6 @@ body{
 .main{
     width:100%;
     height:relative;
-    
 
 }
 .profile{
@@ -25,6 +24,13 @@ body{
     margin-left: 10%;
     float: left;
     background-color: rgba(254, 254, 255, 0.877);
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.options{
+    text-align: left;
+}
+.a{
+    color: rgb(0, 119, 255);
 }
 .content{
     height: 2000px;
@@ -47,6 +53,7 @@ body{
     border: 0.05px solid rgba(211, 212, 212, 0.986);
     position: relative;
     background-color: rgba(254, 254, 255, 0.877);
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 .post{
@@ -55,31 +62,34 @@ body{
     width:80%;
     margin:20px;
     
+    border: 0.05px solid rgba(211, 212, 212, 0.986);
     position: relative;
-    
+    background-color: rgba(254, 254, 255, 0.877);
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 
 .post-meta{
     min-height:80px;
     max-height: 100px;
-    width:96%;
-    margin-left: 2%;
+    width:100%;
+    
     border: 0.05px solid rgba(211, 212, 212, 0.986);
     position: relative;
-    color:rgb(89, 89, 243);
-    background-color: rgba(254, 254, 255, 0.877);
-
+    color:white;
+    vertical-align: middle;
+    background-color: rgb(27, 117, 177);
+    float: bottom;
 }
+
 .post-desc{
     min-height:100px;
     max-height: 300px;
-    width:96%;
-    margin-left: 2%;
+    width:100%;
+    
     border: 0.05px solid rgba(211, 212, 212, 0.986);
     position: relative;
     font-size:24px;
-    background-color: rgba(254, 254, 255, 0.877);
     
 }
 .post-desc p{
@@ -87,17 +97,16 @@ body{
     
 }
 .post-meta a{
-    color:rgb(89, 89, 243);
+    color:white;
     
 }
 .post-comment{
     min-height:40px;
     max-height: 80px;
-    width:96%;
-    margin-left: 2%;    
+    width:100%;
+        
     border: 0.05px solid rgba(211, 212, 212, 0.986);
     position: relative;
-    background-color: rgba(254, 254, 255, 0.877);
 
 
 }
@@ -116,13 +125,13 @@ body{
     float: left;
     position: relative;
     width: relative;
-    
+    margin-left: 24px;
     font-size: 20px;    
 }
 .post-title{
     float: left;
     position: relative;
     width: relative;
-      
+     margin-left: 15px; 
     font-size: 20px;  
 }
