@@ -1,7 +1,7 @@
 
 # Rehabit
 APP TEMPLATE              
- Team-1
+ Team-Vikkingzorros
 
 
 ## About 	 	
@@ -29,7 +29,7 @@ Rehabit Application helps users to track daily bad habits/ mistakes, share oneâ€
 
 - Frontend:   Html , CSS , JavaScript , Thymeleaf
 - Backend:   Spring Boot , MySQL   
-- Notifications: Twilio Notify API
+- Authentication Api: Twilio Verify API
 
 ## How to use 
  
