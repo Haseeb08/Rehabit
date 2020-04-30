@@ -39,7 +39,10 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
 
         http    .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/Rehabit/","/Rehabit/login","/Rehabit/signup").permitAll()
+                .antMatchers("/Rehabit/",
+                        "/Rehabit/login","/Rehabit/signup",
+                        "/Rehabit/otp","/Rehabit/saveUser",
+                        "/Rehabit/processOtp","/Rehabit/resendOtp").permitAll()
                 .antMatchers("/Rehabit/**").authenticated()
                 .and()
                 .formLogin()
@@ -51,6 +54,8 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/Rehabit/")
                 .permitAll();
+
+        http.headers().frameOptions().disable();
     }
 
     //beans

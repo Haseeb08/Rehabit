@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.sql.Timestamp;
 import java.util.regex.Pattern;
 
 @Slf4j
@@ -31,7 +32,7 @@ public class HomeController {
     @Autowired
     private UserValidator userValidator;
 
-    private UserDto sessionUser;
+
     private int otpSentCount;
 
     @GetMapping("/testdash")
@@ -79,14 +80,15 @@ public class HomeController {
     public String saveUser(
             @Valid @ModelAttribute("user") UserDto theUserDto,
             BindingResult theBindingResult,
-            Model theModel) {
+            Model theModel,
+            HttpServletRequest http) {
 
         if (!theBindingResult.hasErrors()) {
 
             if (userValidator.isValid(theUserDto)) {
 
-                sessionUser = theUserDto;
-                if(sendOtp()) {
+                http.getSession().setAttribute("user",theUserDto);
+                if(sendOtp(theUserDto)) {
                     log.info("otp sent");
                     otpSentCount = 1;
                     return "redirect:/Rehabit/otp";
@@ -108,11 +110,11 @@ public class HomeController {
     }
 
     @RequestMapping("/resendOtp")
-    public String resendOtpPage(Model theModel){
+    public String resendOtpPage(Model theModel,HttpServletRequest request){
 
         if(otpSentCount<5) {
             otpSentCount++;
-            boolean status = sendOtp();
+            boolean status = sendOtp((UserDto) request.getSession().getAttribute("user"));
             if (status) {
                 log.info("---otp sent");
                 return "redirect:/Rehabit/otp";
@@ -122,7 +124,7 @@ public class HomeController {
         return "/otp";
     }
 
-    private boolean sendOtp() {
+    private boolean sendOtp(UserDto sessionUser) {
         String userPhoneNumber = sessionUser.getPhoneNumber();
         return authService.sendToken(userPhoneNumber);
     }
@@ -130,6 +132,7 @@ public class HomeController {
     @PostMapping("/processOtp")
     public String processOtp(HttpServletRequest request, Model theModel){
 
+        UserDto sessionUser= (UserDto) request.getSession().getAttribute("user");
         String errorMessage="";
         String otpValue=request.getParameter("otpValue");
 
@@ -143,8 +146,8 @@ public class HomeController {
             String otpStatus = authService.verifyToken(userPhoneNumber, otpValue);
 
             if (otpStatus.equals("approved")) {
-                saveUserToDb();
-                return "dashboard";
+                saveUserToDb(sessionUser);
+                return "login";
             } else if (otpStatus.equals("pending")) {
                 errorMessage = "Wrong OTP entered";
             } else {
@@ -156,9 +159,10 @@ public class HomeController {
 
     }
 
-    private void saveUserToDb() {
+    private void saveUserToDb(UserDto sessionUser) {
 
-        sessionUser.setCreateTime(Long.toString(System.currentTimeMillis()));
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        sessionUser.setCreateTime(timestamp.toString());
 
         userService.save(sessionUser);
 

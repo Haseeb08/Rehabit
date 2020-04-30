@@ -1,4 +1,4 @@
-var expiryTime=6;
+var expiryTime=45;
 var time=expiryTime;
 
 var otpText=document.getElementById("otptime");
